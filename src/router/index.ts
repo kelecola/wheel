@@ -4,7 +4,7 @@ import { useDocumentTitle } from '@/hooks/useDocumentTitle'
 import { getQueryParams, phoneModel } from '@/utils'
 import store from '@/store'
 import { isWeChat } from '../utils/index'
-import { fetchWeChatAuth } from '@/api/WxController'
+// import { fetchWeChatAuth } from '@/api/WxController'
 
 interface IQueryParams {
   code?: string
@@ -25,23 +25,25 @@ const router = createRouter({
 
 // 路由开始进入
 router.beforeEach((to, from, next) => {
+  // console.log('router.beforeEach: ', isWeChat());
+
   useDocumentTitle(to.meta.title)
   //! 解决ios微信下，分享签名不成功的问题,将第一次的进入的url缓存起来。
   if (window.entryUrl === undefined) {
     window.entryUrl = location.href.split('#')[0]
   }
-  const { code } = getQueryParams<IQueryParams>()
+  // const { code } = getQueryParams<IQueryParams>()
   // 微信浏览器内微信授权登陆
   // && !store.state.auth.userInfo.name
-  if (isWeChat()) {
-    if (code) {
-      store.commit('auth/STE_ISAUTH', true)
-      store.commit('auth/STE_CODE', code)
-    }
-    if (!store.state.auth.isAuth) {
-      location.href = fetchWeChatAuth()
-    }
-  }
+  // if (isWeChat()) {
+  //   if (code) {
+  //     store.commit('auth/STE_ISAUTH', true)
+  //     store.commit('auth/STE_CODE', code)
+  //   }
+  //   if (!store.state.auth.isAuth) {
+  //     location.href = fetchWeChatAuth()
+  //   }
+  // }
 
   next()
 })
