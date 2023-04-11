@@ -2,7 +2,7 @@ const prodConfig = require('./prod.config')
 const defaultSettings = require('./src/config/env.' + process.env.VUE_APP_ENV + '.ts')
 console.log(defaultSettings.title)
 // page title
-const name = defaultSettings.title || 'vue mobile template'
+const name = defaultSettings.title || ''
 const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
 
 module.exports = {
