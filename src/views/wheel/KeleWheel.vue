@@ -11,6 +11,7 @@
   />
 </template>
 <script lang="ts">
+
 export default {
   data() {
     const colorA = '#FEF3FC';
@@ -51,13 +52,17 @@ export default {
   },
   methods: {
     startCallback () {
-      this.$refs.myLucky.play();
+      const self = this as any
+      const luckyRef = self.$refs.myLucky as any
+      /* eslint-disable */
+      luckyRef.play();
        // 模拟调用接口异步抽奖
       setTimeout(() => {
         // 假设后端返回的中奖索引是0
         const index = 0
         // 调用stop停止旋转并传递中奖索引
-        this.$refs.myLucky.stop(index)
+        /* eslint-disable */
+        luckyRef.stop(index)
       }, 3000)
     },
     endCallback(prize: any)  {
