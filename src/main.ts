@@ -9,6 +9,8 @@ import '@/assets/css/index.scss'
 import 'amfe-flexible'
 // 全局引入按需引入UI库 vant
 import { vantPlugins } from './plugins/vant'
+// 完整加载
+import VueLuckyCanvas from '@lucky-canvas/vue'
 
 // 使用mock数据
 if (config.mock) {
@@ -17,7 +19,9 @@ if (config.mock) {
 }
 
 const app = createApp(App)
+
 app.use(vantPlugins)
 app.use(store)
 app.use(router)
+app.use(VueLuckyCanvas)
 app.mount('#app')

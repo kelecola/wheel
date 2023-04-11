@@ -2,6 +2,149 @@
 # yarn lockfile v1
 
 
+"@antv/g-camera-api@^1.0.34":
+  version "1.0.34"
+  resolved "https://registry.npmmirror.com/@antv/g-camera-api/-/g-camera-api-1.0.34.tgz#50866a01679caa33470b88d68b5ea64d2f53a3cf"
+  integrity sha512-3Sty9aNb3IEwzMQZDHTFMHjU5xZRo3yWwsCiycsNJHHiUl5KvW9b2mFXmcOr3uAb4v1jJzBmyRGL80TAV35H5A==
+  dependencies:
+    "@antv/util" "^3.3.1"
+    gl-matrix "^3.1.0"
+
+"@antv/g-canvas@^1.9.41":
+  version "1.9.41"
+  resolved "https://registry.npmmirror.com/@antv/g-canvas/-/g-canvas-1.9.41.tgz#2b99b5529312719abe841582ca69334936f880a3"
+  integrity sha512-3y6XzfQ69XcZu53HUsJAIzDMPIHs1k7mB9QL5FiaxvDGt2yeDWMrCihKZdNN2C0pVuItneMAZRNhj7ZKmybHvg==
+  dependencies:
+    "@antv/g-plugin-canvas-path-generator" "^1.1.46"
+    "@antv/g-plugin-canvas-picker" "^1.8.45"
+    "@antv/g-plugin-canvas-renderer" "^1.7.53"
+    "@antv/g-plugin-dom-interaction" "^1.7.45"
+    "@antv/g-plugin-html-renderer" "^1.7.49"
+    "@antv/g-plugin-image-loader" "^1.1.47"
+    "@antv/util" "^3.3.1"
+    "@types/offscreencanvas" "^2019.6.4"
+    tslib "^2.3.1"
+
+"@antv/g-css-layout-api@^1.0.33":
+  version "1.0.33"
+  resolved "https://registry.npmmirror.com/@antv/g-css-layout-api/-/g-css-layout-api-1.0.33.tgz#a857943feb29df6cd8ce4e85ec5091c30da6a3a6"
+  integrity sha512-XqPSrDaiJnl1OKH4/8X7am8s179Ds2egUnf34vmKVxTKJZvSex1jP4+jgmt3L2/ijDnH8WtMxctAPC6p7mpiqg==
+
+"@antv/g-css-typed-om-api@^1.0.33":
+  version "1.0.33"
+  resolved "https://registry.npmmirror.com/@antv/g-css-typed-om-api/-/g-css-typed-om-api-1.0.33.tgz#165f2b44268cc0544bdf046de3409951b356a32d"
+  integrity sha512-Cq4WE7fEmbXyUZywSK6vPwzugPVVfZp6r908YjeY48gWnBelfwowWL76qdddObPTOm+xxR5Tl9EkCiAdrq/fVQ==
+
+"@antv/g-dom-mutation-observer-api@^1.0.33":
+  version "1.0.33"
+  resolved "https://registry.npmmirror.com/@antv/g-dom-mutation-observer-api/-/g-dom-mutation-observer-api-1.0.33.tgz#426e734ce788b22bdf954ba03b6256da1188f147"
+  integrity sha512-htSNqW0eYpl9SUhYs4K3VWQHVdIyo7K0yA+539vP/Xg8dsHb5NKS0Kf5noMO7xhiMnT73k9HYkskPfOqxchB7w==
+
+"@antv/g-lite@^1.0.52":
+  version "1.0.52"
+  resolved "https://registry.npmmirror.com/@antv/g-lite/-/g-lite-1.0.52.tgz#6b9355cc80d771347e0a11c5ae5f65c232a4575f"
+  integrity sha512-w2qfsrPoFsPq5apzWCRVFiEw9HasCceQpxn2nA4akSU8B8RNzj6xUQx459sF5ONI0zv54Ebej0SwGreYBLQfog==
+  dependencies:
+    "@antv/g-math" "^1.7.44"
+    "@antv/util" "^3.3.1"
+    "@types/offscreencanvas" "^2019.6.4"
+    d3-color "^1.4.0"
+    eventemitter3 "^4.0.0"
+    gl-matrix "^3.1.0"
+    rbush "^3.0.1"
+    tslib "^2.3.1"
+
+"@antv/g-math@^1.7.44":
+  version "1.7.44"
+  resolved "https://registry.npmmirror.com/@antv/g-math/-/g-math-1.7.44.tgz#5c7e0134693407b48f8608db6fd02552212fb672"
+  integrity sha512-4DWbf1nfn/HhQ3TSuPrv8NUL+Jtj4JMUR3d4DYnStbbx4rLBFIG7HXVkgRI41yymwpeHDNEH12cOW8AwGl+rNw==
+  dependencies:
+    gl-matrix "^3.1.0"
+    tslib "^2.3.1"
+
+"@antv/g-plugin-canvas-path-generator@^1.1.46":
+  version "1.1.46"
+  resolved "https://registry.npmmirror.com/@antv/g-plugin-canvas-path-generator/-/g-plugin-canvas-path-generator-1.1.46.tgz#34e69b64ab9515c05164104c754eb8bea5220384"
+  integrity sha512-YbV2FHflEUQKdN1cQP0vZNRk51lPlYP68IAGJty7LlFh6oIssBSY9fDyYotD9wTg3rn7V2cFSYCJUBxl53FlAg==
+  dependencies:
+    "@antv/g-math" "^1.7.44"
+    "@antv/util" "^3.3.1"
+    tslib "^2.3.1"
+
+"@antv/g-plugin-canvas-picker@^1.8.45":
+  version "1.8.45"
+  resolved "https://registry.npmmirror.com/@antv/g-plugin-canvas-picker/-/g-plugin-canvas-picker-1.8.45.tgz#e84ce875553cd41d5fae65da80354814267dbd19"
+  integrity sha512-wFZ5xK3RlXfk2qV/hvfyWlfVWTJTuch1CSNZycFAxUmBw3T2eoTq5fWqj81ZnF/T75DiG/8L7aB901BaGfiC8A==
+  dependencies:
+    "@antv/g-plugin-canvas-path-generator" "^1.1.46"
+    "@antv/util" "^3.3.1"
+    gl-matrix "^3.1.0"
+    tslib "^2.3.1"
+
+"@antv/g-plugin-canvas-renderer@^1.7.53":
+  version "1.7.53"
+  resolved "https://registry.npmmirror.com/@antv/g-plugin-canvas-renderer/-/g-plugin-canvas-renderer-1.7.53.tgz#a3891efb8a043bb3e1ac7614570abcc9a0fdf028"
+  integrity sha512-S/U4KYJobEQeoOv1Ahf4JaW8gpQGB2/2f+eNx93GigNkiMD0PxTtXhrclFG1vBHNaLJxdmLHd2WTvI0Qihy3sg==
+  dependencies:
+    "@antv/g-math" "^1.7.44"
+    "@antv/g-plugin-canvas-path-generator" "^1.1.46"
+    "@antv/g-plugin-image-loader" "^1.1.47"
+    "@antv/util" "^3.3.1"
+    gl-matrix "^3.1.0"
+    tslib "^2.3.1"
+
+"@antv/g-plugin-dom-interaction@^1.7.45":
+  version "1.7.45"
+  resolved "https://registry.npmmirror.com/@antv/g-plugin-dom-interaction/-/g-plugin-dom-interaction-1.7.45.tgz#4fdd786d2f248a8f8a6f1ffe662bf880e448ccfb"
+  integrity sha512-14sLKemcCxObQDQPSVjNqD9k7uVvf8OfeCJQCza7IadWqdQPEyvFfhCw458hxW+wQm8zqT6rki0Z3RGZW2SPDw==
+  dependencies:
+    tslib "^2.3.1"
+
+"@antv/g-plugin-html-renderer@^1.7.49":
+  version "1.7.49"
+  resolved "https://registry.npmmirror.com/@antv/g-plugin-html-renderer/-/g-plugin-html-renderer-1.7.49.tgz#877416956d4cd4c7521ceaf496b64263a0333c05"
+  integrity sha512-pwP+bjybMHCMcHpIaVZV26obrNMnbI9YZB+4B1MbDHOYRtlE/NHFnNluDIAV7WiyePjp+gUOjqzeox7WNV+C1Q==
+  dependencies:
+    "@antv/util" "^3.3.1"
+    gl-matrix "^3.1.0"
+    tslib "^2.3.1"
+
+"@antv/g-plugin-image-loader@^1.1.47":
+  version "1.1.47"
+  resolved "https://registry.npmmirror.com/@antv/g-plugin-image-loader/-/g-plugin-image-loader-1.1.47.tgz#4ad185f25a7abbe7307706f90d3311f676146fb4"
+  integrity sha512-GBVA2RfBehkGRcetVW99SPlP7MHhBl89JEueZjyPLx9KdpTZ6z++vnknK/2IVcCKlho41t/IJyarsAGsCwLdQg==
+  dependencies:
+    "@antv/util" "^3.3.1"
+    tslib "^2.3.1"
+
+"@antv/g-web-animations-api@^1.0.34":
+  version "1.0.34"
+  resolved "https://registry.npmmirror.com/@antv/g-web-animations-api/-/g-web-animations-api-1.0.34.tgz#68d8dbad26423b2c69fb6a4122f4e9dc85280b4f"
+  integrity sha512-svqHWdC1jEoEla8yW2EzHaac7Lg2vnzvowSpMjYk/lIZyr9FvZ5flR5e84wLkYF91Q+hx3ouvn2DrRNVhNA2yQ==
+  dependencies:
+    "@antv/util" "^3.3.1"
+
+"@antv/g@^5.16.15":
+  version "5.16.15"
+  resolved "https://registry.npmmirror.com/@antv/g/-/g-5.16.15.tgz#b39d79adebcd4252b21ee0e42fd39b439c1fe0b6"
+  integrity sha512-GM35IZ2lJ/OuDc6uRG9UCsQcZgS0X7DVAQc3VObTmaRklEaONcJ7pWaWg+V/Eu/3b7UNdxJnEF78oTjDbFBozw==
+  dependencies:
+    "@antv/g-camera-api" "^1.0.34"
+    "@antv/g-css-layout-api" "^1.0.33"
+    "@antv/g-css-typed-om-api" "^1.0.33"
+    "@antv/g-dom-mutation-observer-api" "^1.0.33"
+    "@antv/g-lite" "^1.0.52"
+    "@antv/g-web-animations-api" "^1.0.34"
+
+"@antv/util@^3.3.1":
+  version "3.3.2"
+  resolved "https://registry.npmmirror.com/@antv/util/-/util-3.3.2.tgz#6238226c9e2e4a7ba2f0c0821e19ee10844931f1"
+  integrity sha512-uvyQxEOugdJs/FVlpz/+8pKxn70z8jEVydPqv+LI62cpIF7YDjVnMfNIsoMqwEoTzPUJ9TJalyLqZhT5rYez0w==
+  dependencies:
+    fast-deep-equal "^3.1.3"
+    gl-matrix "^3.3.0"
+    tslib "^2.3.1"
+
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.8.3":
   version "7.12.13"
   resolved "https://registry.npm.taobao.org/@babel/code-frame/download/@babel/code-frame-7.12.13.tgz?cache=0&sync_timestamp=1612314682452&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fcode-frame%2Fdownload%2F%40babel%2Fcode-frame-7.12.13.tgz#dcfc826beef65e75c50e21d3837d7d95798dd658"
@@ -877,6 +1020,15 @@
     cssnano-preset-default "^4.0.0"
     postcss "^7.0.0"
 
+"@lucky-canvas/vue@^0.1.11":
+  version "0.1.11"
+  resolved "https://registry.npmmirror.com/@lucky-canvas/vue/-/vue-0.1.11.tgz#79d79d1a07b71c572080e638bb78d8636d8d759d"
+  integrity sha512-5vm0txSKRBtMgrE/HZEvw1joSTx9NTdAkc8tBp/aX0LxyhQtiTVBLsRgdYUK/OiURCL8bo+046BTGnV+Q4JFlg==
+  dependencies:
+    "@vue/composition-api" "^1.0.0"
+    lucky-canvas "^1.7.23"
+    vue-demi "^0.7.4"
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.npm.taobao.org/@mrmlnc/readdir-enhanced/download/@mrmlnc/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -1029,6 +1181,11 @@
   resolved "https://registry.npm.taobao.org/@types/normalize-package-data/download/@types/normalize-package-data-2.4.0.tgz#e486d0d97396d79beedd0a6e33f4534ff6b4973e"
   integrity sha1-5IbQ2XOW15vu3QpuM/RTT/a0lz4=
 
+"@types/offscreencanvas@^2019.6.4":
+  version "2019.7.0"
+  resolved "https://registry.npmmirror.com/@types/offscreencanvas/-/offscreencanvas-2019.7.0.tgz#e4a932069db47bb3eabeb0b305502d01586fa90d"
+  integrity sha512-PGcyveRIpL1XIqK8eBsmRBt76eFgtzuPiSTyKHZxnGemp2yzGzWpjYKAfK3wIMiU7eH+851yEpiuP8JZerTmWg==
+
 "@types/parse-json@^4.0.0":
   version "4.0.0"
   resolved "https://registry.npm.taobao.org/@types/parse-json/download/@types/parse-json-4.0.0.tgz#2f8bb441434d163b35fb8ffdccd7138927ffb8c0"
@@ -1073,6 +1230,11 @@
   integrity sha1-K7BhwmlEFiDUa5RjUMjxbVLvN8U=
   dependencies:
     source-map "^0.6.1"
+
+"@types/webfontloader@^1.6.35":
+  version "1.6.35"
+  resolved "https://registry.npmmirror.com/@types/webfontloader/-/webfontloader-1.6.35.tgz#c9cedff2995c61ee9b2064714e7f7d7763ac50bd"
+  integrity sha512-IJlrsiDWq6KghQ7tPlL5tcwSUyOxLDceT+AFUY7Ylj0Fcv3/h3QkANqQxZ0B5mEpEKxhTw76vDmvrruSMV9n9Q==
 
 "@types/webpack-dev-server@^3.11.0":
   version "3.11.1"
@@ -1505,6 +1667,11 @@
     vue-template-es2015-compiler "^1.9.0"
   optionalDependencies:
     prettier "^1.18.2"
+
+"@vue/composition-api@^1.0.0":
+  version "1.7.1"
+  resolved "https://registry.npmmirror.com/@vue/composition-api/-/composition-api-1.7.1.tgz#aa6831be5a12817d93e89e247460c310dd7a3a32"
+  integrity sha512-xDWoEtxGXhH9Ku3ROYX/rzhcpt4v31hpPU5zF3UeVC/qxA3dChmqU8zvTUYoKh3j7rzpNsoFOwqsWG7XPMlaFA==
 
 "@vue/eslint-config-prettier@^6.0.0":
   version "6.0.0"
@@ -3258,6 +3425,11 @@ cyclist@^1.0.1:
   resolved "https://registry.npm.taobao.org/cyclist/download/cyclist-1.0.1.tgz#596e9698fd0c80e12038c2b82d6eb1b35b6224d9"
   integrity sha1-WW6WmP0MgOEgOMK4LW6xs1tiJNk=
 
+d3-color@^1.4.0:
+  version "1.4.1"
+  resolved "https://registry.npmmirror.com/d3-color/-/d3-color-1.4.1.tgz#c52002bf8846ada4424d55d97982fef26eb3bc8a"
+  integrity sha512-p2sTHSLCJI2QKunbGb7ocOh7DgTAn8IrLx21QRc/BSnodXM4sv6aLQlnfpvehFMLZEfBc6g9pH9SWQccFYfJ9Q==
+
 dashdash@^1.12.0:
   version "1.14.1"
   resolved "https://registry.npm.taobao.org/dashdash/download/dashdash-1.14.1.tgz#853cfa0f7cbe2fed5de20326b8dd581035f6e2f0"
@@ -4054,7 +4226,7 @@ extsprintf@^1.2.0:
   resolved "https://registry.npm.taobao.org/extsprintf/download/extsprintf-1.4.0.tgz#e2689f8f356fad62cca65a3a91c5df5f9551692f"
   integrity sha1-4mifjzVvrWLMplo6kcXfX5VRaS8=
 
-fast-deep-equal@^3.1.1:
+fast-deep-equal@^3.1.1, fast-deep-equal@^3.1.3:
   version "3.1.3"
   resolved "https://registry.npm.taobao.org/fast-deep-equal/download/fast-deep-equal-3.1.3.tgz#3a7d56b559d6cbc3eb512325244e619a65c6c525"
   integrity sha1-On1WtVnWy8PrUSMlJE5hmmXGxSU=
@@ -4442,6 +4614,11 @@ getpass@^0.1.1:
   integrity sha1-Xv+OPmhNVprkyysSgmBOi6YhSfo=
   dependencies:
     assert-plus "^1.0.0"
+
+gl-matrix@^3.1.0, gl-matrix@^3.3.0:
+  version "3.4.3"
+  resolved "https://registry.npmmirror.com/gl-matrix/-/gl-matrix-3.4.3.tgz#fc1191e8320009fd4d20e9339595c6041ddc22c9"
+  integrity sha512-wcCp8vu8FT22BnvKVPjXa/ICBWRq/zjFfdofZy1WSpQZpphblv12/bOQLBC1rMM7SGOFS9ltVmKOHil5+Ml7gA==
 
 glob-parent@^3.1.0:
   version "3.1.0"
@@ -5650,6 +5827,11 @@ lru-cache@^6.0.0:
   integrity sha1-bW/mVw69lqr5D8rR2vo7JWbbOpQ=
   dependencies:
     yallist "^4.0.0"
+
+lucky-canvas@^1.7.23:
+  version "1.7.27"
+  resolved "https://registry.npmmirror.com/lucky-canvas/-/lucky-canvas-1.7.27.tgz#ce4689e99aa1945d981f0489304f5f3c1789023d"
+  integrity sha512-Ftz6qD+863bI7xijBmZg3dw3cNEc7odPr70EZQcGA14y3TgTAzH65HPosOCd6kKUlMwhntBaHMx3onoj9MtJRQ==
 
 magic-string@^0.25.7:
   version "0.25.7"
@@ -7185,6 +7367,11 @@ querystringify@^2.1.1:
   resolved "https://registry.npm.taobao.org/querystringify/download/querystringify-2.2.0.tgz#3345941b4153cb9d082d8eee4cda2016a9aef7f6"
   integrity sha1-M0WUG0FTy50ILY7uTNogFqmu9/Y=
 
+quickselect@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.npmmirror.com/quickselect/-/quickselect-2.0.0.tgz#f19680a486a5eefb581303e023e98faaf25dd018"
+  integrity sha512-RKJ22hX8mHe3Y6wH/N3wCM6BWtjaxIyyUIkpHOvfFnxdI4yD4tBXEBKSbriGujF6jnSVkJrffuo6vxACiSSxIw==
+
 randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5, randombytes@^2.1.0:
   version "2.1.0"
   resolved "https://registry.npm.taobao.org/randombytes/download/randombytes-2.1.0.tgz#df6f84372f0270dc65cdf6291349ab7a473d4f2a"
@@ -7214,6 +7401,13 @@ raw-body@2.4.0:
     http-errors "1.7.2"
     iconv-lite "0.4.24"
     unpipe "1.0.0"
+
+rbush@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.npmmirror.com/rbush/-/rbush-3.0.1.tgz#5fafa8a79b3b9afdfe5008403a720cc1de882ecf"
+  integrity sha512-XRaVO0YecOpEuIvbhbpTrZgoiI6xBlz6hnlr6EHhd+0x9ase6EmeN+hdwwUaJvLcsFFQ8iWVF1GAK1yB0BWi0w==
+  dependencies:
+    quickselect "^2.0.0"
 
 read-pkg@^5.1.1:
   version "5.2.0"
@@ -8481,6 +8675,11 @@ tslib@^2.0.3:
   resolved "https://registry.npm.taobao.org/tslib/download/tslib-2.1.0.tgz?cache=0&sync_timestamp=1609887512458&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ftslib%2Fdownload%2Ftslib-2.1.0.tgz#da60860f1c2ecaa5703ab7d39bc05b6bf988b97a"
   integrity sha1-2mCGDxwuyqVwOrfTm8Bba/mIuXo=
 
+tslib@^2.3.1:
+  version "2.5.0"
+  resolved "https://registry.npmmirror.com/tslib/-/tslib-2.5.0.tgz#42bfed86f5787aeb41d031866c8f402429e0fddf"
+  integrity sha512-336iVw3rtn2BUK7ORdIAHTyxHGRIHVReokCR3XjbckJMK7ms8FysBfhLR8IXnAgy7T0PTPNBWKiH514FOW/WSg==
+
 tslint@^5.20.1:
   version "5.20.1"
   resolved "https://registry.npm.taobao.org/tslint/download/tslint-5.20.1.tgz?cache=0&sync_timestamp=1605260608467&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ftslint%2Fdownload%2Ftslint-5.20.1.tgz#e401e8aeda0152bc44dd07e614034f3f80c67b7d"
@@ -8844,6 +9043,11 @@ vm-browserify@^1.0.1:
   resolved "https://registry.npm.taobao.org/vm-browserify/download/vm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"
   integrity sha1-eGQcSIuObKkadfUR56OzKobl3aA=
 
+vue-demi@^0.7.4:
+  version "0.7.5"
+  resolved "https://registry.npmmirror.com/vue-demi/-/vue-demi-0.7.5.tgz#88dee7492fc99a0f911ff03fc02c658fa2a79af8"
+  integrity sha512-eFSQSvbQdY7C9ujOzvM6tn7XxwLjn0VQDXQsiYBLBwf28Na+2nTQR4BBBcomhmdP6mmHlBKAwarq6a0BPG87hQ==
+
 vue-eslint-parser@^7.0.0, vue-eslint-parser@^7.5.0:
   version "7.5.0"
   resolved "https://registry.npm.taobao.org/vue-eslint-parser/download/vue-eslint-parser-7.5.0.tgz?cache=0&sync_timestamp=1613263436899&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvue-eslint-parser%2Fdownload%2Fvue-eslint-parser-7.5.0.tgz#b68221c55fee061899afcfb4441ec74c1495285e"
@@ -8952,6 +9156,11 @@ wcwidth@^1.0.1:
   integrity sha1-8LDc+RW8X/FSivrbLA4XtTLaL+g=
   dependencies:
     defaults "^1.0.3"
+
+webfontloader@^1.6.28:
+  version "1.6.28"
+  resolved "https://registry.npmmirror.com/webfontloader/-/webfontloader-1.6.28.tgz#db786129253cb6e8eae54c2fb05f870af6675bae"
+  integrity sha512-Egb0oFEga6f+nSgasH3E0M405Pzn6y3/9tOVanv/DLfa1YBIgcv90L18YyWnvXkRbIM17v5Kv6IT2N6g1x5tvQ==
 
 webpack-bundle-analyzer@^3.8.0:
   version "3.9.0"

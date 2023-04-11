@@ -5,7 +5,7 @@
   <!-- <router-view /> -->
   <!-- </div> -->
   <router-view />
-  <MobileConsole />
+  <!-- <MobileConsole /> -->
 </template>
 <script lang="ts">
 import { defineComponent, watch } from 'vue'

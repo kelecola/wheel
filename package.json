@@ -11,6 +11,10 @@
     "lint": "vue-cli-service lint --mode development"
   },
   "dependencies": {
+    "@antv/g": "^5.16.15",
+    "@antv/g-canvas": "^1.9.41",
+    "@lucky-canvas/vue": "^0.1.11",
+    "@types/webfontloader": "^1.6.35",
     "amfe-flexible": "^2.2.1",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
@@ -20,6 +24,7 @@
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0",
     "vuex-persistedstate": "^4.0.0-beta.3",
+    "webfontloader": "^1.6.28",
     "weixin-js-sdk": "^1.6.0"
   },
   "devDependencies": {
