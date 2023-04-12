@@ -32,9 +32,10 @@
   
 </template>
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, reactive } from 'vue'
 import { useRouter } from 'vue-router';
 import { questionArrInit } from './constant';
+import { Toast } from 'vant';
 
 export default defineComponent({
   name: 'Question',
@@ -42,10 +43,12 @@ export default defineComponent({
   setup() {
     const router = useRouter()
     const questionArr: any = ref(questionArrInit);
-    const result: any = ref(Array.from({length: 10}, () => ''));
+    const result: any = reactive(Array.from({length: 10}, () => ''));
     const onClickLeft = () => history.back();
-    const onSubmit = () => {
+    const onSubmit = (val: any) => {
+      console.log('val', val, result.value);
       console.log('onSubmit', onSubmit);
+      Toast.success('全部答对')
       router.push('/wheel')
     }
     return {

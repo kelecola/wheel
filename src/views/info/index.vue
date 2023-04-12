@@ -17,7 +17,7 @@
           name="identity"
           label="身份证"
           placeholder="身份证"
-          :rules="[{ required: true, message: '请填写身份证' }]"
+          :rules="[{ required: true, message: '请填写身份证' }, { validator: isIdentity, message: '身份证号码格式错误！' }]"
         />
         <van-field
           v-model="phone"
@@ -25,7 +25,8 @@
           name="phone"
           label="手机号"
           placeholder="手机号"
-          :rules="[{ required: true, message: '请填写手机号' }]"
+          :rules="[{ required: true, message: '请填写手机号' },  
+          { pattern: /^1[3456789]\d{9}$/, message: '手机号码格式错误！'}]"
         />
       </van-cell-group>
       <van-button class="button" type="default" text="立即前往" size="large" native-type="submit"></van-button>
@@ -38,6 +39,7 @@
 import { defineComponent, ref } from 'vue'
 import WordTitle from './WordTitle.vue'
 import { useRouter } from "vue-router";
+import { Toast } from 'vant';
 
 export default defineComponent({
   name: 'Info',
@@ -53,18 +55,26 @@ export default defineComponent({
     const router = useRouter()
     
     const onSubmit = (values: any) => {
-      console.log('submit', values);
-      router.push('/question')
+      try {
+        console.log('submit', values);
+        router.push('/question')
+      } catch (e) {
+        Toast.fail(e)
+      }
+      
     };
 
-    
-    
+    const isIdentity = (val: any) => {
+      return /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(val);
+    }
 
+    
     return {
       name,
       identity,
       phone,
       onSubmit,
+      isIdentity
     };
   }
 })

@@ -1,16 +1,20 @@
 <template lang="">
-  <LuckyWheel
-    ref="myLucky"
-    width="350px"
-    height="350px"
-    :prizes="prizes"
-    :blocks="blocks"
-    :buttons="buttons"
-    @start="startCallback"
-    @end="endCallback"
-  />
+  <div class="lucky-wheel-inter">
+    <LuckyWheel
+      ref="myLucky"
+      width="350px"
+      height="350px"
+      :prizes="prizes"
+      :blocks="blocks"
+      :buttons="buttons"
+      @start="startCallback"
+      @end="endCallback"
+    />
+  </div>
 </template>
 <script lang="ts">
+import { Toast } from 'vant';
+
 
 export default {
   data() {
@@ -63,14 +67,17 @@ export default {
         // 调用stop停止旋转并传递中奖索引
         /* eslint-disable */
         luckyRef.stop(index)
-      }, 3000)
+      }, 0)
     },
     endCallback(prize: any)  {
       console.log(prize)
+      Toast.success("恭喜获得三等奖")
     },
   }
 }
 </script>
-<style lang="">
-  
+<style lang="scss" scoped>
+.lucky-wheel-inter {
+  padding: 1rem 0 0 0;
+}
 </style>

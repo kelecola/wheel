@@ -1,7 +1,6 @@
 <!-- Rem -->
 <template>
   <div class="wheel_wrapper">
-   
     <van-nav-bar
       title="抽奖页面"
       left-text="返回"
@@ -35,6 +34,8 @@ export default defineComponent({
   .kele_wheel_wrapper {
     display: flex;
     justify-content: center;
+    height: calc(100vh - 1.22667rem);
+    background-color: oldlace;
   }
 }
 </style>
