@@ -85,8 +85,8 @@ export default defineComponent({
   width: 100%;
   height: 100%;
   font-size: 12px;
-  background: url('../../assets/tp2.jpeg');
-  background-size: cover;
+  background: url('../../assets/fy1.png');
+  background-size:100% 100%;
   .title {
     padding-top: 15%;
     margin: 0 5%;

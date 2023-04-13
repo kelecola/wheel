@@ -32,8 +32,8 @@ export default defineComponent({
         textOverflow: 'ellipsis',
         fontSize: 24,
         fill: '#1989fa',
-        // stroke: '#F04864',
-        lineWidth: 5,
+        stroke: '#fff',
+        lineWidth: 4,
       },
     });
       canvas.appendChild(text);
