@@ -1,8 +1,6 @@
 import request from '@/utils/request'
 
-/**
- * 获取用户信息
- */
+
 export const getQuestions = () => {
   return request({
     url: '/api/questions',
@@ -11,14 +9,21 @@ export const getQuestions = () => {
   })
 }
 
-export const updateUser = (sKey: any, key: any, value: any) => {
+export const getMulQuestions = () => {
+  return request({
+    url: '/api/mul_questions',
+    method: 'get',
+    loading: true
+  })
+}
+
+export const updateUser = (sKey: any, updateData: any) => {
   return request({
     url: '/api/updateUser',
     method: 'post',
     data: {
       sKey,
-      key,
-      value
+      updateData
     },
     loading: true
   })

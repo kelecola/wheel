@@ -26,15 +26,29 @@
       
       </van-field>
     </van-cell-group>
+
+    <van-cell-group inset class="subject" v-for="(item, i) in mulQuestionArr" :key="i">
+
+      <van-field :label="item.question" required="true" :rules="[{ required: true, message: '请选择' }]" class="subject_title">
+        <template #input>
+          <van-checkbox-group  v-if="item.type === 'mul'" v-model="mulResult[i]">
+            <template v-for="it in item.ansList" :key="it.key">
+              <van-checkbox shape="square" :name="it.key">{{ `${it.key}.${it.text}` }}</van-checkbox>
+            </template>
+          </van-checkbox-group>
+        </template>
+      
+      </van-field>
+    </van-cell-group>
     <van-button class="button" type="primary" text="提交" size="large" native-type="submit"></van-button>
   </van-form>
   
 </template>
 <script lang="ts">
+import { Toast } from 'vant';
 import { defineComponent, onMounted, reactive, toRefs } from 'vue'
 import { useRouter } from 'vue-router';
-import { Toast } from 'vant';
-import { getQuestions, updateUser } from './request'
+import { getQuestions, getMulQuestions, updateUser } from './request'
 
 export default defineComponent({
   name: 'AskQuestion',
@@ -42,7 +56,9 @@ export default defineComponent({
   setup() {
     const resData: any = reactive({
       questionArr: [],
+      mulQuestionArr: [],
       result: [],
+      mulResult: [],
       params: {}
     });
 
@@ -55,8 +71,15 @@ export default defineComponent({
       resData.questionArr = data;
     }
 
-    const curUpdate = async (sKey: any, key: any, value: any) => {
-      await updateUser(sKey, key, value)
+    const curGetMulQuestions = async () => {
+      
+      const { data } = await getMulQuestions();
+
+      resData.mulQuestionArr = data;
+    }
+
+    const curUpdate = async (sKey: any, obj: any) => {
+      await updateUser(sKey, obj)
     }
     
     
@@ -85,23 +108,37 @@ export default defineComponent({
           ans: item.ansList[covertMap[resData.result?.[index]]].text
         }
       })
-      console.log('passNum', passNum);
-      
-      if (passNum >= 1) {
-        curUpdate(resData.params.phone, 'ask_ans', ask_ans)
-        curUpdate(resData.params.phone, 'step', 2)
-        // router.push(`/askQuestion/${identity}/${phone}/${name}`)
-        // router.push({ name: 'wheel', params: {...resData.params}})
 
+      console.log('resData', resData.mulResult, resData.mulQuestionArr);
+      
+
+      const mul_ask_ans = resData.mulQuestionArr.map((item: any, index: number) => {
+        if (item.ans === resData.mulResult[index].join('')) {
+          passNum++;
+        }
+        return {
+          question : item.question,
+          ans: resData.mulResult[index]
+        }
+      })
+      
+      if (passNum >= 8) {
+        curUpdate(resData.params.phone, {
+          ask_ans: [...ask_ans, ...mul_ask_ans],
+          step: 2
+        })
 
         console.log('resData.params', resData.params.id, resData.params.phone, resData.params.name);
         
         router.push(`/wheel/${resData.params.id}/${resData.params.phone}/${resData.params.name}`)
+      } else {
+        Toast.fail(`已答对${passNum}道，答对8道题以上，即可参与抽奖`)
       }
     }
 
     onMounted(() => {
       curGetQuestions();
+      curGetMulQuestions();
       resData.params = router.currentRoute.value.params
     });
 
@@ -130,16 +167,16 @@ export default defineComponent({
   
 }
 .subject {
-  .van-radio__label {
+  .van-radio__label, .van-checkbox__label {
     color: #333;
   }
   .subject_title {
-    .van-field__label {
+    .van-field__label, .van-checkbox__label {
       color: #333;
       width: 100%;
       margin-bottom: 0.2rem;
     }
-    .van-radio {
+    .van-radio, .van-checkbox {
       height: 1rem;
       align-items: flex-start;
     }

@@ -1,9 +1,11 @@
 import request from '@/utils/request'
 
-
-export const getQuestions = () => {
+/**
+ * 获取用户信息
+ */
+export const getWinIndex = () => {
   return request({
-    url: '/api/ask_questions',
+    url: '/api/win_index',
     method: 'get',
     loading: true
   })
@@ -17,6 +19,16 @@ export const updateUser = (sKey: any, updateData: any) => {
       sKey,
       updateData
     },
+    loading: true
+  })
+}
+
+export const checkAnsed = (data: any) => {
+  return request({
+    // 是不是回答过初级问题
+    url: '/api/checkAnsed',
+    method: 'post',
+    data,
     loading: true
   })
 }

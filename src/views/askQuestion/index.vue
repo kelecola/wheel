@@ -43,7 +43,7 @@ export default defineComponent({
 
     const resData: any = reactive({
       questionArr: [],
-      result: Array.from({length: 10}, () => ''),
+      result: Array.from({length: 11}, () => ''),
       ansList: [],
       params: {}
     });
@@ -58,8 +58,8 @@ export default defineComponent({
       resData.questionArr = data;
     }
 
-    const curUpdate = async (sKey: any, key: any, value: any) => {
-      await updateUser(sKey, key, value)
+    const curUpdate = async (sKey: any, obj: any) => {
+      await updateUser(sKey, obj)
     }
     
     const onClickLeft = () => history.back();
@@ -69,7 +69,7 @@ export default defineComponent({
         if (item.otherKey) {
           return {
             question: item.questions,
-            ans: resData.result?.[index + 1]
+            ans: resData.result?.[index]
           }
         }
         return {
@@ -78,9 +78,11 @@ export default defineComponent({
         }
       })
 
+      console.log('question_ans', question_ans);
+      
 
-      curUpdate(resData.params.phone, 'question_ans', question_ans)
-      curUpdate(resData.params.phone, 'step', 1)
+
+      curUpdate(resData.params.phone, {question_ans, step: 1})
   
 
       // router.push({ name: 'question', params: resData.params})
