@@ -26,9 +26,9 @@ export default {
     const colorB = '#F8DEF8';
     const blocks= [{ padding: '40px', imgs:[{ width: '350px', height: '350px' ,src: require('../../assets/zp3_bg.png')}], }]
     const prizes= [
-        { fonts: [{ text: '三等奖', top: '10%', winText: '恭喜获得三等奖', winFlag: true }], background: colorB }, // 0 0.5 - 1
-        { fonts: [{ text: '谢谢参与', top: '10%', winText: '谢谢参与，明天再来', winFlag: false }], background: colorA }, // 1 0.5 - 1
-        { fonts: [{ text: '三等奖', top: '10%', winText: '恭喜获得三等奖',  winFlag: true }], background: colorB }, // 2 0.5 - 1
+        { fonts: [{ text: '三等奖', top: '10%', winText: '恭喜获得三等奖', winFlag: true }], background: colorB }, // 8
+        { fonts: [{ text: '四等奖', top: '10%', winText: '恭喜获得四等奖', winFlag: true }], background: colorA }, // 1 0.5 - 1
+        { fonts: [{ text: '四等奖', top: '10%', winText: '恭喜获得四等奖',  winFlag: true }], background: colorB }, // 2 0.5 - 1
         { fonts: [{ text: '谢谢参与', top: '10%', winText: '谢谢参与，明天再来', winFlag: false }], background: colorA }, // 3 0.5 - 1
         { fonts: [{ text: '一等奖', top: '10%', winText: '恭喜获得一等奖', winFlag: true }], background: colorB }, // 4  => 0.0127
         { fonts: [{ text: '谢谢参与', top: '10%', winText: '谢谢参与，明天再来', winFlag: false }], background: colorA }, // 5 0.5 - 1
