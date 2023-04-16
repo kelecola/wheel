@@ -61,7 +61,6 @@ export default defineComponent({
 
     const curCheckAnsed = async (params: any) => {
       const { data: { step } } = await checkAnsed(params)
-      console.log('step', step);
       
       const { name, identity, phone } = params;
       if (step === 0) {
@@ -69,6 +68,12 @@ export default defineComponent({
       } else if (!step) {
         await curAddUser(params)
         router.push(`/askQuestion/${identity}/${phone}/${name}`)
+      } 
+      // else if (step === 1) {
+      //   router.push(`/question/${identity}/${phone}/${name}`)
+      // } 
+      else if (step === 3) {
+        router.push(`/wheel/${identity}/${phone}/${name}`)
       } else {
         router.push(`/question/${identity}/${phone}/${name}`)
       }
@@ -86,7 +91,6 @@ export default defineComponent({
       return /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(val);
     }
 
-    
     return {
       name,
       identity,
