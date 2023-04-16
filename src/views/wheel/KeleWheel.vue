@@ -10,7 +10,7 @@
       @start="startCallback"
       @end="endCallback"
     />
-    <van-cell-group v-if="step === 3" inset>
+    <van-cell-group v-if="step === 3 || winText" inset>
       <van-cell title="中奖记录 （仅限绍兴移动、电信手机号，其他地区用户参加不予充值奖励）
       " :label="$route.params.phone + winText" />
     </van-cell-group>
@@ -63,25 +63,28 @@ export default {
     }
   },
   methods: {
-    async curCheckAnsed(params: any) {
+    async curCheckAnsed(params: any, needToast: boolean) {
       const self = this as any
       const { data: { step, winText } } = await checkAnsed(params)
       self.step = step;
       self.winText = winText;
-      if (step === 3) {
-        Toast.success('您已经参与过抽奖！')
+      if (step === 3 || winText) {
+        needToast && Toast.success('您已经参与过抽奖！')
         return false
       }
       if (step === 2) {
         return true;
       }
-      Toast.fail('请先完成问卷！')
+      needToast && Toast.fail('请先完成问卷！')
       return false;
     },
 
     async curUpdate (sKey: any, updateData: any, str: string)  {
       const { code } = await updateUser(sKey, updateData)
+      const self = this as any
+      const params =  self.$route.params
       if (code === 200) {
+        self.curCheckAnsed(params, false)
         Toast.success(str)
       }
     },
@@ -94,7 +97,7 @@ export default {
       const self = this as any
       const luckyRef = self.$refs.myLucky as any
       const params =  self.$route.params
-      const isPass = await self.curCheckAnsed(params)
+      const isPass = await self.curCheckAnsed(params, true)
 
 
       if (isPass) {
@@ -118,7 +121,7 @@ export default {
   created() {
     const self = this as any
     const params =  self.$route.params
-    self.curCheckAnsed(params)
+    self.curCheckAnsed(params, true)
   }
 }
 </script>

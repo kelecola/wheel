@@ -25,7 +25,7 @@ module.exports = {
     //配置跨域
     proxy: {
       '/api': {
-        target: "http://127.0.0.1:7201",
+        target: "http://112.124.20.38:7201",
         // ws: true, // 是否启用websockets
         changOrigin: true, // 开启代理，在本地创建一个虚拟服务端
         pathRewrite: {
