@@ -40,6 +40,7 @@ import { defineComponent, ref } from 'vue'
 import WordTitle from './WordTitle.vue'
 import { useRouter } from "vue-router";
 import { Toast } from 'vant';
+import { checkAnsed, addUser } from './request'
 
 export default defineComponent({
   name: 'Info',
@@ -53,15 +54,32 @@ export default defineComponent({
     const phone = ref('');
 
     const router = useRouter()
-    
-    const onSubmit = (values: any) => {
-      try {
-        console.log('submit', values);
-        router.push('/question')
-      } catch (e) {
-        Toast.fail(e)
-      }
+
+    const curAddUser = async (params: any) => {
+      await addUser(params) 
+    }
+
+    const curCheckAnsed = async (params: any) => {
+      const { data: { step } } = await checkAnsed(params)
+      console.log('step', step);
       
+      const { name, identity, phone } = params;
+      if (step === 0) {
+        router.push(`/askQuestion/${identity}/${phone}/${name}`)
+      } else if (!step) {
+        await curAddUser(params)
+        router.push(`/askQuestion/${identity}/${phone}/${name}`)
+      } else {
+        router.push(`/question/${identity}/${phone}/${name}`)
+      }
+    }
+    
+    const onSubmit = async (values: any) => {
+      try {
+        await curCheckAnsed(values);
+      } catch (e) {
+        Toast.fail(JSON.stringify(e))
+      }
     };
 
     const isIdentity = (val: any) => {

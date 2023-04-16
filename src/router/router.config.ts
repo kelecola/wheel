@@ -12,12 +12,17 @@ export const constantRouterMap: Array<RouteRecordRaw> = [
     component: () => import('@/views/info/index.vue'),
   },
   {
-    path: '/question',
+    path: '/askQuestion/:id/:phone/:name',
+    name: 'askQuestion',
+    component: () => import('@/views/askQuestion/index.vue'),
+  },
+  {
+    path: '/question/:id/:phone/:name',
     name: 'question',
     component: () => import('@/views/question/index.vue'),
   },
   {
-    path: '/wheel',
+    path: '/wheel/:id/:phone/:name',
     name: 'wheel',
     component: () => import('@/views/wheel/index.vue'),
   },

@@ -8,7 +8,7 @@ const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
 module.exports = {
   // lintOnSave: true, // lint检查
   lintOnSave: !IS_PROD, // lint检查
-  publicPath: './', // 署应用包时的基本 URL。 vue-router hash 模式使用
+  publicPath: '/', // 署应用包时的基本 URL。 vue-router hash 模式使用
   // publicPath: '/app/', //署应用包时的基本 URL。  vue-router history模式使用
   outputDir: process.env.OUTPUT_DIR, //  生产环境构建文件的目录
   assetsDir: 'static', //  outputDir的静态资源(js、css、img、fonts)目录
@@ -21,18 +21,18 @@ module.exports = {
       //  当出现编译器错误或警告时，在浏览器中显示全屏覆盖层
       warnings: false,
       errors: true
-    }
+    },
     //配置跨域
-    // proxy: {
-    //   '/api': {
-    //       target: "https://test.xxx.com",
-    //       // ws: true, // 是否启用websockets
-    //       changOrigin:true, // 开启代理，在本地创建一个虚拟服务端
-    //       pathRewrite:{
-    //           '^/api':'/'
-    //       }
-    //   }
-    // }
+    proxy: {
+      '/api': {
+        target: "http://127.0.0.1:7201",
+        // ws: true, // 是否启用websockets
+        changOrigin: true, // 开启代理，在本地创建一个虚拟服务端
+        pathRewrite: {
+          '^/api': '/'
+        }
+      }
+    }
   },
   css: {
     loaderOptions: {

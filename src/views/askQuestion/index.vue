@@ -8,50 +8,53 @@
   />
   <van-form @submit="onSubmit">
     <div class="question_wrapper">
-      <div class="title">问卷调查</div>
+      <div class="title">慢性病综合防控参与度和满意度调查问卷</div>
       <div class="sub_title">
-        感谢您能抽出几分钟时间来参加本次答题，现在我们答题开始吧！
+        为了解辖区开展慢性病综合防控示范区建设工作情况和你对慢性病综合防控工作的参与度和满意度，以便于更好的推进慢性病综合防控示范区建设，希望得到你的支持，本调查不涉及个人隐私，调查结果只是为了更好地推进慢性病防控工作，提高居民参与慢性病防控工作。感谢您的支持！
       </div>
     </div>
     <van-cell-group inset class="subject" v-for="(item, i) in questionArr" :key="i">
-
-      <van-field :label="item.question" required="true" :rules="[{ required: true, message: '请选择' }]" class="subject_title">
+      <van-field v-if="!item.otherKey" :label="item.question" required="true" :rules="[{ required: true, message: '请选择' }]" class="subject_title">
         <template #input>
-          <van-radio-group  v-if="item.type === 'single'" v-model="result[i]">
+          <van-radio-group v-model="result[i]">
             <template v-for="it in item.ansList" :key="it.key">
-              <van-radio :name="it.key">{{ `${it.key}.${it.text}` }}</van-radio>
+              <van-radio :name="it.key">{{ `${it.text}` }}</van-radio>
             </template>
           </van-radio-group>
         </template>
-      
       </van-field>
+      <van-field placeholder="请输入" v-if="item.otherKey" :label="item.questions" required="true" :rules="[{ required: true, message: '请输入' }]" class="subject_title" v-model="result[i]"></van-field>
     </van-cell-group>
     <van-button class="button" type="primary" text="提交" size="large" native-type="submit"></van-button>
   </van-form>
+  
   
 </template>
 <script lang="ts">
 import { defineComponent, onMounted, reactive, toRefs } from 'vue'
 import { useRouter } from 'vue-router';
-import { Toast } from 'vant';
 import { getQuestions, updateUser } from './request'
 
 export default defineComponent({
-  name: 'AskQuestion',
+  name: 'Question',
   props: {},
   setup() {
+    
+
     const resData: any = reactive({
       questionArr: [],
-      result: [],
+      result: Array.from({length: 10}, () => ''),
+      ansList: [],
       params: {}
     });
 
-    const router = useRouter()
+    const router = useRouter();
 
     const curGetQuestions = async () => {
       
       const { data } = await getQuestions();
-
+      resData.ansList = (resData.questionArr || [].map((item: any) => item.ansList))
+      
       resData.questionArr = data;
     }
 
@@ -59,49 +62,35 @@ export default defineComponent({
       await updateUser(sKey, key, value)
     }
     
-    
     const onClickLeft = () => history.back();
-    const onSubmit = (val: any) => {
-      // console.log('val', val, result.value);
-      // debugger
-      // console.log('onSubmit', resData);
+    const onSubmit = () => {
 
-      let passNum = 0;
-
-      const covertMap = {
-        A: 0,
-        B: 1,
-        C: 2,
-        D: 3
-      }
-
-
-      const ask_ans = resData.questionArr.map((item: any, index: number) => {
-        if (item.ans === resData.result[index]) {
-          passNum++;
+      const question_ans = resData.questionArr.map((item: any, index: number) => {
+        if (item.otherKey) {
+          return {
+            question: item.questions,
+            ans: resData.result?.[index + 1]
+          }
         }
         return {
           question : item.question,
-          ans: item.ansList[covertMap[resData.result?.[index]]].text
+          ans: item.ansList[Number(resData.result?.[index]) - 1].text
         }
       })
-      console.log('passNum', passNum);
-      
-      if (passNum >= 1) {
-        curUpdate(resData.params.phone, 'ask_ans', ask_ans)
-        curUpdate(resData.params.phone, 'step', 2)
-        // router.push(`/askQuestion/${identity}/${phone}/${name}`)
-        // router.push({ name: 'wheel', params: {...resData.params}})
 
 
-        console.log('resData.params', resData.params.id, resData.params.phone, resData.params.name);
-        
-        router.push(`/wheel/${resData.params.id}/${resData.params.phone}/${resData.params.name}`)
-      }
+      curUpdate(resData.params.phone, 'question_ans', question_ans)
+      curUpdate(resData.params.phone, 'step', 1)
+  
+
+      // router.push({ name: 'question', params: resData.params})
+      router.push(`/question/${resData.params.id}/${resData.params.phone}/${resData.params.name}`)
+
     }
 
     onMounted(() => {
       curGetQuestions();
+      
       resData.params = router.currentRoute.value.params
     });
 
@@ -113,7 +102,6 @@ export default defineComponent({
   },
 })
 </script>
-
 <style lang="scss">
 .question_wrapper {
   margin: 0.5rem;
