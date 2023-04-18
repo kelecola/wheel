@@ -64,10 +64,12 @@ export default defineComponent({
       
       const { name, identity, phone } = params;
       if (step === 0) {
-        router.push(`/askQuestion/${identity}/${phone}/${name}`)
+        router.push(`/question/${identity}/${phone}/${name}`)
+        
       } else if (!step) {
         await curAddUser(params)
-        router.push(`/askQuestion/${identity}/${phone}/${name}`)
+        router.push(`/question/${identity}/${phone}/${name}`)
+        // router.push(`/askQuestion/${identity}/${phone}/${name}`)
       } 
       // else if (step === 1) {
       //   router.push(`/question/${identity}/${phone}/${name}`)
@@ -75,7 +77,8 @@ export default defineComponent({
       else if (step === 3) {
         router.push(`/wheel/${identity}/${phone}/${name}`)
       } else {
-        router.push(`/question/${identity}/${phone}/${name}`)
+        // router.push(`/question/${identity}/${phone}/${name}`)
+        router.push(`/askQuestion/${identity}/${phone}/${name}`)
       }
     }
     

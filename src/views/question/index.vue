@@ -85,9 +85,6 @@ export default defineComponent({
     
     const onClickLeft = () => history.back();
     const onSubmit = (val: any) => {
-      // console.log('val', val, result.value);
-      // debugger
-      // console.log('onSubmit', resData);
 
       let passNum = 0;
 
@@ -109,7 +106,7 @@ export default defineComponent({
         }
       })
 
-      console.log('resData', resData.mulResult, resData.mulQuestionArr);
+      // console.log('resData', resData.mulResult, resData.mulQuestionArr);
       
 
       const mul_ask_ans = resData.mulQuestionArr.map((item: any, index: number) => {
@@ -125,12 +122,12 @@ export default defineComponent({
       if (passNum >= 8) {
         curUpdate(resData.params.phone, {
           ask_ans: [...ask_ans, ...mul_ask_ans],
-          step: 2
+          step: 1
         })
 
-        console.log('resData.params', resData.params.id, resData.params.phone, resData.params.name);
+        // console.log('resData.params', resData.params.id, resData.params.phone, resData.params.name);
         
-        router.push(`/wheel/${resData.params.id}/${resData.params.phone}/${resData.params.name}`)
+        router.push(`/askQuestion/${resData.params.id}/${resData.params.phone}/${resData.params.name}`)
       } else {
         Toast.fail(`已答对${passNum}道，答对8道题以上，即可参与抽奖`)
       }

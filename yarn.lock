@@ -1037,6 +1037,11 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
+"@neoconfetti/svelte@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.npmmirror.com/@neoconfetti/svelte/-/svelte-1.0.0.tgz#84a7f98981ad546d959d8c99460da8cebdf70301"
+  integrity sha512-SmksyaJAdSlMa9cTidVSIqYo1qti+WTsviNDwgjNVm+KQ3DRP2Df9umDIzC4vCcpEYY+chQe0i2IKnLw03AT8Q==
+
 "@nodelib/fs.stat@^1.1.2":
   version "1.1.3"
   resolved "https://registry.npm.taobao.org/@nodelib/fs.stat/download/@nodelib/fs.stat-1.1.3.tgz?cache=0&sync_timestamp=1609074440744&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40nodelib%2Ffs.stat%2Fdownload%2F%40nodelib%2Ffs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
@@ -9042,6 +9047,16 @@ vm-browserify@^1.0.1:
   version "1.1.2"
   resolved "https://registry.npm.taobao.org/vm-browserify/download/vm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"
   integrity sha1-eGQcSIuObKkadfUR56OzKobl3aA=
+
+vue-confetti-explosion@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.npmmirror.com/vue-confetti-explosion/-/vue-confetti-explosion-1.0.2.tgz#84b873d400cf0301814bdd71329daa1ac741fd86"
+  integrity sha512-80OboM3/6BItIoZ6DpNcZFqGpF607kjIVc5af56oKgtFmt5yWehvJeoYhkzYlqxrqdBe0Ko4Ie3bWrmLau+dJw==
+
+vue-confetti@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.npmmirror.com/vue-confetti/-/vue-confetti-2.3.0.tgz#c8fbb0081a16ad8e5756ec63de8f454583ce054b"
+  integrity sha512-zmPniVzBKv0ie/BEXBR6Isi08hYSd6lS18b8VduG5BzZ2tv6bO/rlwISg+IpGY2XsqAFTXFdTC28YR+UPocnAw==
 
 vue-demi@^0.7.4:
   version "0.7.5"

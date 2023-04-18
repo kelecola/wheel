@@ -53,13 +53,15 @@ export default {
         }],
       }]
     let step = 2;
-    let winText = ''
+    let winText = '';
+    let visible = false;
     return {
       blocks,
       prizes,
       buttons,
       step,
-      winText
+      winText,
+      visible
     }
   },
   methods: {
@@ -128,5 +130,8 @@ export default {
 <style lang="scss" scoped>
 .lucky-wheel-inter {
   padding: 1rem 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>

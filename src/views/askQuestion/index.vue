@@ -82,11 +82,11 @@ export default defineComponent({
       
 
 
-      curUpdate(resData.params.phone, {question_ans, step: 1})
+      curUpdate(resData.params.phone, {question_ans, step: 2})
   
 
       // router.push({ name: 'question', params: resData.params})
-      router.push(`/question/${resData.params.id}/${resData.params.phone}/${resData.params.name}`)
+      router.push(`/wheel/${resData.params.id}/${resData.params.phone}/${resData.params.name}`)
 
     }
 

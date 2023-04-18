@@ -11,6 +11,12 @@ import 'amfe-flexible'
 import { vantPlugins } from './plugins/vant'
 // 完整加载
 import VueLuckyCanvas from '@lucky-canvas/vue'
+// import ConfettiExplosion from "vue-confetti-explosion";
+
+/* eslint-disable */
+// import VueConfetti from 'vue-confetti'
+
+
 
 // 使用mock数据
 if (config.mock) {
@@ -20,6 +26,7 @@ if (config.mock) {
 
 const app = createApp(App)
 
+// app.use(VueConfetti)
 app.use(vantPlugins)
 app.use(store)
 app.use(router)

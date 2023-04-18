@@ -28,7 +28,7 @@ export default defineComponent({
         x: 0,
         y: 40,
         fontFamily: 'Gaegu',
-        text: '填写信息参与问卷调查',
+        text: '填写信息参与答题赢话费',
         textOverflow: 'ellipsis',
         fontSize: 24,
         fill: '#1989fa',
