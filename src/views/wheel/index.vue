@@ -2,7 +2,7 @@
 <template>
   <div class="wheel_wrapper">
     <van-nav-bar
-      title="抽奖页面"
+      title="参与抽奖"
       left-text="返回"
       left-arrow
       @click-left="onClickLeft"

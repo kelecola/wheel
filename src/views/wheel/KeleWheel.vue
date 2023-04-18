@@ -15,12 +15,17 @@
       " :label="$route.params.phone + winText" />
     </van-cell-group>
   </div>
+  <canvas-confetti ref="confetti" />
 </template>
 <script lang="ts">
 import { Toast } from 'vant';
 import { getWinIndex, updateUser, checkAnsed } from './request'
+import CanvasConfetti from '@/components/CanvasConfetti.vue'
 
 export default {
+  components: {
+    CanvasConfetti
+  },
   data() {
     const colorA = '#FEF3FC';
     const colorB = '#F8DEF8';
@@ -65,6 +70,10 @@ export default {
     }
   },
   methods: {
+    startFrame () {
+      const self = this as any
+      self.$refs.confetti.startFrame()
+    },
     async curCheckAnsed(params: any, needToast: boolean) {
       const self = this as any
       const { data: { step, winText } } = await checkAnsed(params)
@@ -86,6 +95,7 @@ export default {
       const self = this as any
       const params =  self.$route.params
       if (code === 200) {
+        self.startFrame();
         self.curCheckAnsed(params, false)
         Toast.success(str)
       }
@@ -119,6 +129,10 @@ export default {
         Toast.success(winText)
       }
     },
+  },
+  mounted() {
+    // const self = this as any
+    // self.startFrame()
   },
   created() {
     const self = this as any

@@ -1,7 +1,7 @@
 <!-- Rem -->
 <template>
   <van-nav-bar
-    title="问卷调查"
+    title="肿瘤和职业病防治答题"
     left-text="返回"
     left-arrow
     @click-left="onClickLeft"

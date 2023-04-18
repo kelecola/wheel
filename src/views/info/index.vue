@@ -11,14 +11,14 @@
           placeholder="姓名"
           :rules="[{ required: true, message: '请填写姓名' }]"
         />
-        <van-field
+        <!-- <van-field
           v-model="identity"
           type="identity"
           name="identity"
           label="身份证"
           placeholder="身份证"
           :rules="[{ required: true, message: '请填写身份证' }, { validator: isIdentity, message: '身份证号码格式错误！' }]"
-        />
+        /> -->
         <van-field
           v-model="phone"
           type="phone"
@@ -29,7 +29,7 @@
           { pattern: /^1[3456789]\d{9}$/, message: '手机号码格式错误！'}]"
         />
       </van-cell-group>
-      <van-button class="button" type="default" text="立即前往" size="large" native-type="submit"></van-button>
+      <van-button class="button" type="default" text="点击这里参加答题" size="large" native-type="submit"></van-button>
     </van-form>
     
   </div>
@@ -70,11 +70,11 @@ export default defineComponent({
         await curAddUser(params)
         router.push(`/question/${identity}/${phone}/${name}`)
         // router.push(`/askQuestion/${identity}/${phone}/${name}`)
-      } 
+      }
       // else if (step === 1) {
       //   router.push(`/question/${identity}/${phone}/${name}`)
       // } 
-      else if (step === 3) {
+      else if (step === 3 || step === 2) {
         router.push(`/wheel/${identity}/${phone}/${name}`)
       } else {
         // router.push(`/question/${identity}/${phone}/${name}`)
@@ -113,7 +113,7 @@ export default defineComponent({
   background: url('../../assets/fy1.png');
   background-size:100% 100%;
   .title {
-    padding-top: 15%;
+    padding-top: 50%;
     margin: 0 5%;
   }
   .form_wrapper {

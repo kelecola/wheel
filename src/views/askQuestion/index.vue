@@ -1,7 +1,7 @@
 <!-- Rem -->
 <template>
   <van-nav-bar
-    title="问卷调查"
+    title="肿瘤和职业病防治问卷"
     left-text="返回"
     left-arrow
     @click-left="onClickLeft"
@@ -23,7 +23,14 @@
           </van-radio-group>
         </template>
       </van-field>
-      <van-field placeholder="请输入" v-if="item.otherKey" :label="item.questions" required="true" :rules="[{ required: true, message: '请输入' }]" class="subject_title" v-model="result[i]"></van-field>
+      <van-field @click="showPicker = true" placeholder="请输入" v-if="item.otherKey" :label="item.questions" required="true" :rules="[{ required: true, message: '请输入' }]" class="subject_title" v-model="result[i]"></van-field>
+      <van-popup v-model:show="showPicker" position="bottom" round>
+        <van-picker
+          :columns="columns"
+          @confirm="onConfirm"
+          @cancel="showPicker = false"
+        />
+      </van-popup>
     </van-cell-group>
     <van-button class="button" type="primary" text="提交" size="large" native-type="submit"></van-button>
   </van-form>
@@ -31,7 +38,7 @@
   
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, reactive, toRefs } from 'vue'
+import { defineComponent, onMounted, reactive, toRefs, ref } from 'vue'
 import { useRouter } from 'vue-router';
 import { getQuestions, updateUser } from './request'
 
@@ -39,14 +46,37 @@ export default defineComponent({
   name: 'Question',
   props: {},
   setup() {
-    
+    const result = ref(Array.from({length: 11}, () => ''));
+    const showPicker = ref(false);
+    const columns = [
+      '甘霖镇',
+      '崇仁镇',
+      '长乐镇',
+      '三界镇',
+      '黄泽镇',
+      '三江街道',
+      '鹿山街道',
+      '剡湖街道',
+      '浦口街道',
+      '石璜镇',
+      '谷来镇',
+      '仙岩镇',
+      '金庭镇',
+      '下王镇',
+      '贵门乡'];
+
 
     const resData: any = reactive({
       questionArr: [],
-      result: Array.from({length: 11}, () => ''),
+      result,
       ansList: [],
       params: {}
     });
+
+    const onConfirm = (value: any) => {
+      result.value[10] = value;
+      showPicker.value = false;
+    };
 
     const router = useRouter();
 
@@ -99,7 +129,10 @@ export default defineComponent({
     return {
       onClickLeft,
       ...toRefs(resData),
-      onSubmit
+      onSubmit,
+      onConfirm,
+      columns,
+      showPicker,
     };
   },
 })
