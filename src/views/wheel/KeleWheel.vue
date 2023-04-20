@@ -19,7 +19,7 @@
 </template>
 <script lang="ts">
 import { Toast } from 'vant';
-import { getWinIndex, updateUser, checkAnsed } from './request'
+import { getWinIndex, updateUser, checkAnsed, getRestTime } from './request'
 import CanvasConfetti from '@/components/CanvasConfetti.vue'
 
 export default {
@@ -34,11 +34,11 @@ export default {
         { fonts: [{ text: '三等奖', top: '10%', winText: '恭喜获得三等奖', winFlag: true }], background: colorB }, // 8
         { fonts: [{ text: '四等奖', top: '10%', winText: '恭喜获得四等奖', winFlag: true }], background: colorA }, // 1 0.5 - 1
         { fonts: [{ text: '四等奖', top: '10%', winText: '恭喜获得四等奖',  winFlag: true }], background: colorB }, // 2 0.5 - 1
-        { fonts: [{ text: '谢谢参与', top: '10%', winText: '谢谢参与，明天再来', winFlag: false }], background: colorA }, // 3 0.5 - 1
+        { fonts: [{ text: '谢谢参与', top: '10%', winText: '谢谢参与', winFlag: false }], background: colorA }, // 3 0.5 - 1
         { fonts: [{ text: '一等奖', top: '10%', winText: '恭喜获得一等奖', winFlag: true }], background: colorB }, // 4  => 0.0127
-        { fonts: [{ text: '谢谢参与', top: '10%', winText: '谢谢参与，明天再来', winFlag: false }], background: colorA }, // 5 0.5 - 1
+        { fonts: [{ text: '谢谢参与', top: '10%', winText: '谢谢参与', winFlag: false }], background: colorA }, // 5 0.5 - 1
         { fonts: [{ text: '二等奖', top: '10%', winText: '恭喜获得二等奖', winFlag: true }], background: colorB }, // 6 => 0.021185
-        { fonts: [{ text: '谢谢参与', top: '10%', winText: '谢谢参与，明天再来', winFlag: false  }], background: colorA }, // 7 => 0.38125
+        { fonts: [{ text: '谢谢参与', top: '10%', winText: '谢谢参与', winFlag: false  }], background: colorA }, // 7 => 0.38125
       ]
     const buttons=[{
         width:'92',
@@ -74,6 +74,10 @@ export default {
       const self = this as any
       self.$refs.confetti.startFrame()
     },
+    async curGetRestTime(parmas:any) {
+      const { data } = await getRestTime( parmas)
+      return data;
+    },
     async curCheckAnsed(params: any, needToast: boolean) {
       const self = this as any
       const { data: { step, winText } } = await checkAnsed(params)
@@ -100,9 +104,9 @@ export default {
         Toast.success(str)
       }
     },
-    async curGetWinIndex () {
-      const { data } = await getWinIndex();
-      return data || 1;
+    async curGetWinIndex (params: any) {
+      const { data, restTimeToday } = await getWinIndex(params);
+      return { data: data || 1, restTimeToday };
     },
 
     async startCallback () {
@@ -113,20 +117,27 @@ export default {
 
 
       if (isPass) {
-        luckyRef.play();
+        
         // 模拟调用接口异步抽奖
-        let index: any = await this.curGetWinIndex() || 1;
-        luckyRef.stop(index)
+        let { data, restTimeToday }: any = await this.curGetWinIndex(params) || 1;
+
+        if (restTimeToday) {
+          luckyRef.play();
+          luckyRef.stop(data)
+        } else {
+          Toast.fail('今天的抽奖次数用完，请明天再来！')
+        }
       }
     },
-    endCallback(prize: any)  {
+    async endCallback(prize: any)  {
       const self = this as any
       const { winText, winFlag } = prize.fonts[0];
       const params =  self.$route.params
       if (winFlag) {
         this.curUpdate(params.phone, { step: 3, winText }, winText)
       } else {
-        Toast.success(winText)
+        const times = await this.curGetRestTime(params) || 0;
+        Toast.success(`${winText}，剩余抽奖次数${times}次！`)
       }
     },
   },
