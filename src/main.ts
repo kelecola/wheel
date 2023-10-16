@@ -16,14 +16,6 @@ import VueLuckyCanvas from '@lucky-canvas/vue'
 /* eslint-disable */
 // import VueConfetti from 'vue-confetti'
 
-
-
-// 使用mock数据
-if (config.mock) {
-  const { mockXHR } = require('../mock')
-  mockXHR()
-}
-
 const app = createApp(App)
 
 // app.use(VueConfetti)

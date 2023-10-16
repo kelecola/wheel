@@ -678,13 +678,6 @@ module.exports = [
 - main.js
   如果不需要使用，去除掉这段代码就可以了
 
-```js
-// 使用mock数据
-if (config.mock) {
-	const { mockXHR } = require('../mock')
-	mockXHR()
-}
-```
 
 - 接口请求
 
