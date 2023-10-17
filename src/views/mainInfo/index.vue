@@ -47,27 +47,10 @@
         <div class="info_wrapper_nav1_item">
           <div class="item_pic1">
           </div>
-          <div class="item_2">服用说明</div>
-          <div class="item_3">专业用药指导</div>
         </div>
         <div class="info_wrapper_nav1_item">
           <div class="item_pic2">
           </div>
-          <div class="item_2">咨询医生</div>
-          <div class="item_3">7*24h极速接诊</div>
-        </div>
-        <div class="info_wrapper_nav1_item">
-          <div class="item_pic3">
-            <img />
-          </div>
-          <div class="item_2">用药助理</div>
-          <div class="item_3">药品管理提醒</div>
-        </div>
-        <div class="info_wrapper_nav1_item">
-          <div class="item_pic4">
-          </div>
-          <div class="item_2">就医挂号</div>
-          <div class="item_3">多平台号源共享</div>
         </div>
       </div>
     </div>
@@ -286,34 +269,24 @@ export default defineComponent({
     padding: 0 12px;
     margin-top: 12px;
     .info_wrapper_nav1_item {
+      height: 88px;
+      width: 175px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 15px 0;
+      padding: 15px 0 0 0;
     }
     .item_pic1 {
-      height: 24px;
-      width: 24px;
-      background: url('../../assets/icon/shuoming.png') no-repeat;
+      height: 100%;
+      width: 100%;
+      background: url('../../assets/icon/left.jpg') no-repeat;
       background-size: contain;
     }
     .item_pic2 {
-      height: 24px;
-      width: 24px;
-      background: url('../../assets/icon/shuoming.png') no-repeat;
-      background-size: contain;
-    }
-    .item_pic3 {
-      height: 24px;
-      width: 24px;
-      background: url('../../assets/icon/shuoming.png') no-repeat;
-      background-size: contain;
-    }
-    .item_pic4 {
-      height: 24px;
-      width: 24px;
-      background: url('../../assets/icon/shuoming.png') no-repeat;
+      height: 100%;
+      width: 100%;
+      background: url('../../assets/icon/right.jpg') no-repeat;
       background-size: contain;
     }
     .item_2 {
