@@ -48,6 +48,7 @@ export default defineComponent({
   setup() {
     const activeNames = ref(['']);
     const showPicker = ref(false);
+    // todo: 改动点
     const items2 = [{"k":"药品生产日期","type":"生产信息","v":"2023-05-28 00:00:00"},{"k":"药品有效期截至日期","type":"生产信息","v":"2024-06-14 00:00:00"},{"k":"药品生产批号","type":"生产信息","v":"05281000"}];
     const items1 = [
       {"k":"药品通用名称(中文)","type":"基本信息","v":"片仔癀"},{"k":"药品商品名称 (中文)","type":"基本信息","v":"片仔癀"},{"k":"国家药品标识码","type":"基本信息","v":"04879001203"},{"k":"药品本位码","type":"基本信息","v":"86904879000126"},{"k":"剂型","type":"基本信息","v":"锭剂"},{"k":"制剂规格","type":"基本信息","v":"每粒重3g"},{"k":"包装规格","type":"基本信息","v":"1粒/盒"},{"k":"包装转换比","type":"基本信息","v":"1"},{"k":"药品有效期","type":"基本信息","v":"60月"},{"k":"药品批准文号","type":"基本信息","v":"国药准字Z35020243"},{"k":"药品批准文号有效期","type":"基本信息","v":"2025-03-15 00:00:00"},
@@ -81,6 +82,37 @@ export default defineComponent({
 </script>
 <style lang="scss">
 .detail_wrapper {
+  .van-collapse-item {
+    .van-collapse-item__title {
+      border-radius: 10px 10px 0 0;
+    }
+    .van-collapse-item__content {
+      .van-cell {
+        display: flex;
+        font-size: 13px;
+        color: #303133;
+        .van-cell__title {
+          flex: 1;
+          margin-right: 36px;
+        }
+        .van-cell__value {
+          flex: 2;
+          text-align: left;
+          display: flex;
+          align-items: center;
+          font-size: 13px;
+          color: #303133;
+        }
+      }
+      border-radius: 0 0 10px 10px;
+    }
+    .van-collapse-item__wrapper {
+      border: none;
+    }
+    .van-cell:nth-child(2n+1) {
+      background-color: #fbfbfb;
+    }
+  }
   .van-cell .van-cell--clickable .van-collapse-item__title {
     display: flex;
     justify-content: center;
