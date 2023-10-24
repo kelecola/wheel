@@ -11,5 +11,10 @@ export const constantRouterMap: Array<RouteRecordRaw> = [
     path: '/d',
     name: 'detail',
     component: () => import('@/views/detail/index.vue'),
+  },
+  {
+    path: '/v',
+    name: 'verify',
+    component: () => import('@/views/verify/index.vue'),
   }
 ]

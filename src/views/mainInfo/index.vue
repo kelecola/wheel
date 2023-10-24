@@ -24,7 +24,7 @@
             <span>人扫码查询</span>
           </div>
           <div class="info_line3">
-            <div class="info_button">验证详情 ></div>
+            <div class="info_button" @click="toVerify">验证详情 ></div>
           </div>
         </div>
       </div>
@@ -58,6 +58,7 @@
         <button @click="toDetail" class="info_wrapper_drug_button">添加到用药助理</button>
       </div>
     </div>
+    
     <div class="info_wrapper_nav1_wrapper">
       <div class="info_wrapper_nav1">
         <div class="info_wrapper_nav1_item">
@@ -84,30 +85,38 @@
       <div class="info_wrapper_footer_item">如有问题可联系平台客服 010-95000011</div>
     </div>
     <div class="info_wrapper_empty"></div>
-    <div class="info_wrapper_fix">
-      <div class="info_wrapper_fix_item"></div>
+    <div class="info_wrapper_fix" >
+      <div class="info_wrapper_fix_item">
+        <div class="info_wrapper_fix_item_forClick" @click="getCameras"></div>
+      </div>
     </div>
-    
+    <div id="reader"></div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+/* eslint-disable */
+import { defineComponent, ref, reactive, onMounted } from 'vue'
 import NumberItem from './NumberItem.vue'
+// import Qrcode from './QrcodeReader.vue'
 import { useRouter } from "vue-router";
 import { Toast } from 'vant';
 import { getProductById } from './request'
+import { Html5Qrcode } from 'html5-qrcode';
 
 export default defineComponent({
   name: 'Info',
   props: {},
   components: {
-    NumberItem
+    NumberItem,
   },
   setup() {
-    const detail = ref('');
-    const identity = ref('');
-    const phone = ref('');
+    const detail = reactive({});
+
+    let cameraId = ref('');
+    let devicesInfo = ref<any>('');
+    let html5QrCode = ref<any>(null);
+
 
     const curGetProductById = async (params: any) => {
       await getProductById(params)
@@ -119,12 +128,91 @@ export default defineComponent({
       router.push(`/d`)
     }
 
+    const toVerify = () => {
+      console.log('toVerify');
+      router.push(`/v`)
+    }
+    
+    const getCameras = () => {
+      Html5Qrcode.getCameras()
+        .then((devices: any[]) => {
+          console.log('摄像头信息', devices);
+          if (devices && devices.length) {
+            // 如果有2个摄像头，1为前置的
+            if (devices.length > 1) {
+              cameraId.value = devices[1].id;
+            } else {
+              cameraId.value = devices[0].id;
+            }
+            devicesInfo.value = devices;
+            // start开始扫描
+            start();
+          }
+        })
+        .catch((err) => {
+          // handle err
+          console.log('获取设备信息失败', err); // 获取设备信息失败
+        });
+    };
+
+    const start = () => {
+      html5QrCode = new Html5Qrcode('reader');
+      html5QrCode
+        .start(
+          cameraId.value, // retreived in the previous step.
+          {
+            fps: 10, // 设置每秒多少帧
+            qrbox: { width: 250, height: 250 }, // 设置取景范围
+            // scannable, rest shaded.
+          },
+          (decodedText: string, decodedResult: any) => {
+            // do something when code is read. For example:
+            // if (qrCodeMessage) {
+            //   getCode(qrCodeMessage);
+            //   stop();
+            // }
+            console.log('扫描的结果', decodedText, decodedResult);
+            // if (decodedText) {
+            //   router.push('order');
+            // }
+          },
+          (errorMessage: any) => {
+            // parse error, ideally ignore it. For example:
+            // console.log(`QR Code no longer in front of camera.`);
+            console.log('暂无额扫描结果', errorMessage);
+          }
+        )
+        .catch((err: any) => {
+          // Start failed, handle it. For example,
+          console.log(`Unable to start scanning, error: ${err}`);
+        });
+
+
+      const stop = () => {
+        html5QrCode
+          .stop()
+          .then((ignore: any) => {
+            // QR Code scanning is stopped.
+            console.log('QR Code scanning stopped.', ignore);
+          })
+          .catch((err: any) => {
+            // Stop failed, handle it.
+            console.log('Unable to stop scanning.', err);
+          });
+      }
+    };
+
 
     return {
       detail,
-      toDetail
+      toDetail,
+      toVerify,
+      getCameras,
+      start,
+      stop,
     };
-  }
+  },
+  
 })
 </script>
 
@@ -148,6 +236,7 @@ export default defineComponent({
   }
 }
 .info_wrapper {
+  position: relative;
   font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,微软雅黑,Arial,sans-serif;
   .info_wrapper_header {
     width: 100%;
@@ -377,6 +466,13 @@ export default defineComponent({
       background: url('../../assets/icon/footer.jpg') no-repeat;
       background-size: 100%;
       height: 100%;
+      .info_wrapper_fix_item_forClick {
+        position: fixed;
+        height: 78px;
+        width: 80px;
+        z-index: 99999;
+        left: calc(50% - 40px);
+      }
     }
   }
   .info_button {
@@ -390,6 +486,11 @@ export default defineComponent({
     color: #fff;
     background-color: #007aff;
   }
+}
+#reader {
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
 }
 
 </style>
