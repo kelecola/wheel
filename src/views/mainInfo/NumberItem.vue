@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div id="container"></div>
 </template>
 
@@ -14,4 +14,4 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-</style>
+</style> -->

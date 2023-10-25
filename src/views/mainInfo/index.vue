@@ -20,7 +20,7 @@
           </div>
           <div class="info_line2">
             <span>药品已被</span>
-            <span class="info_line2_number">55</span>
+            <span class="info_line2_number">{{detail.scanNumber}}</span>
             <span>人扫码查询</span>
           </div>
           <div class="info_line3">
@@ -87,10 +87,9 @@
     <div class="info_wrapper_empty"></div>
     <div class="info_wrapper_fix" >
       <div class="info_wrapper_fix_item">
-        <div class="info_wrapper_fix_item_forClick" @click="getCameras"></div>
+        <div class="info_wrapper_fix_item_forClick" @click="toScan"></div>
       </div>
     </div>
-    <div id="reader"></div>
   </div>
 </template>
 
@@ -101,7 +100,7 @@ import NumberItem from './NumberItem.vue'
 // import Qrcode from './QrcodeReader.vue'
 import { useRouter } from "vue-router";
 import { Toast } from 'vant';
-import { getProductById } from './request'
+import { getDetailById } from './request'
 import { Html5Qrcode } from 'html5-qrcode';
 
 export default defineComponent({
@@ -110,20 +109,29 @@ export default defineComponent({
   components: {
     NumberItem,
   },
+  
   setup() {
-    const detail = reactive({});
+    const detail = reactive<any>({});
 
     let cameraId = ref('');
     let devicesInfo = ref<any>('');
     let html5QrCode = ref<any>(null);
 
-
-    const curGetProductById = async (params: any) => {
-      await getProductById(params)
-    }
-    
     const router = useRouter();
 
+    const curGetDetailById = async () => {    
+      const id = router.currentRoute.value.query.c;
+      const { data, code } = await getDetailById({id})
+      const { scanNumber } = data || {};
+      detail.scanNumber = scanNumber;
+    }
+    
+    const toScan = () => {
+      console.log('toScan !!!');
+      
+      router.push(`/s`)
+    }
+  
     const toDetail = () => {
       router.push(`/d`)
     }
@@ -132,84 +140,18 @@ export default defineComponent({
       console.log('toVerify');
       router.push(`/v`)
     }
-    
-    const getCameras = () => {
-      Html5Qrcode.getCameras()
-        .then((devices: any[]) => {
-          console.log('摄像头信息', devices);
-          if (devices && devices.length) {
-            // 如果有2个摄像头，1为前置的
-            if (devices.length > 1) {
-              cameraId.value = devices[1].id;
-            } else {
-              cameraId.value = devices[0].id;
-            }
-            devicesInfo.value = devices;
-            // start开始扫描
-            start();
-          }
-        })
-        .catch((err) => {
-          // handle err
-          console.log('获取设备信息失败', err); // 获取设备信息失败
-        });
-    };
 
-    const start = () => {
-      html5QrCode = new Html5Qrcode('reader');
-      html5QrCode
-        .start(
-          cameraId.value, // retreived in the previous step.
-          {
-            fps: 10, // 设置每秒多少帧
-            qrbox: { width: 250, height: 250 }, // 设置取景范围
-            // scannable, rest shaded.
-          },
-          (decodedText: string, decodedResult: any) => {
-            // do something when code is read. For example:
-            // if (qrCodeMessage) {
-            //   getCode(qrCodeMessage);
-            //   stop();
-            // }
-            console.log('扫描的结果', decodedText, decodedResult);
-            // if (decodedText) {
-            //   router.push('order');
-            // }
-          },
-          (errorMessage: any) => {
-            // parse error, ideally ignore it. For example:
-            // console.log(`QR Code no longer in front of camera.`);
-            console.log('暂无额扫描结果', errorMessage);
-          }
-        )
-        .catch((err: any) => {
-          // Start failed, handle it. For example,
-          console.log(`Unable to start scanning, error: ${err}`);
-        });
-
-
-      const stop = () => {
-        html5QrCode
-          .stop()
-          .then((ignore: any) => {
-            // QR Code scanning is stopped.
-            console.log('QR Code scanning stopped.', ignore);
-          })
-          .catch((err: any) => {
-            // Stop failed, handle it.
-            console.log('Unable to stop scanning.', err);
-          });
-      }
-    };
+    onMounted(() => {
+      curGetDetailById()
+    });
 
 
     return {
       detail,
       toDetail,
       toVerify,
-      getCameras,
-      start,
-      stop,
+      toScan,
+      curGetDetailById
     };
   },
   
@@ -236,7 +178,6 @@ export default defineComponent({
   }
 }
 .info_wrapper {
-  position: relative;
   font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,微软雅黑,Arial,sans-serif;
   .info_wrapper_header {
     width: 100%;
@@ -488,8 +429,6 @@ export default defineComponent({
   }
 }
 #reader {
-  top: 50%;
-  left: 0;
   transform: translateY(-50%);
 }
 

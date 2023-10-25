@@ -16,5 +16,10 @@ export const constantRouterMap: Array<RouteRecordRaw> = [
     path: '/v',
     name: 'verify',
     component: () => import('@/views/verify/index.vue'),
+  },
+  {
+    path: '/s',
+    name: 'scan',
+    component: () => import('@/views/scan/index.vue'),
   }
 ]
