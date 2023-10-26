@@ -25,9 +25,9 @@ export default defineComponent({
 
     const router = useRouter();
 
-    const curApiScan  = async () => {
+    const curApiScan  = async (genCode: any) => {
       const id = router.currentRoute.value.query.c;
-      const { data, code } = await apiScan({id})
+      const { data, code } = await apiScan({genCode})
     }
     
     const getCameras = () => {
@@ -70,6 +70,7 @@ export default defineComponent({
             // }
             console.log('扫描的结果', decodedText, decodedResult);
             if (decodedText) {
+              curApiScan(decodedText)
               window.location.href = `https://pzh6.com/?c=${decodedText}`
             }
           },

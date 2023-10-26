@@ -5,7 +5,7 @@ export const getDetailById = (params: any) => {
   console.log('params', params);
 
   return request({
-    url: '/api/detail',
+    url: '/api/hel/index',
     method: 'post',
     data: params,
     loading: true

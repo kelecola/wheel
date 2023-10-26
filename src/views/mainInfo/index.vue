@@ -9,7 +9,26 @@
       </div>
     </div>
     <div class="info_wrapper_body">
-      <div class="info_wrapper_body_boxs">
+      <div v-if="detail.scanNumber === 0" class="info_wrapper_body_boxs_new">
+        <number-item></number-item>
+        <number-item></number-item>
+        <number-item></number-item>
+        <number-item></number-item>
+        <div class="info_line_wrapper">
+          <div class="info_line1">
+            <span>药品被多人验证</span>
+          </div>
+          <div class="info_line2">
+            <span>药品已被</span>
+            <span class="info_line2_number">{{detail.scanNumber}}</span>
+            <span>人扫码查询</span>
+          </div>
+          <div class="info_line3">
+            <div class="info_button" @click="toVerify">验证详情 ></div>
+          </div>
+        </div>
+      </div>
+      <div v-else class="info_wrapper_body_boxs">
         <number-item></number-item>
         <number-item></number-item>
         <number-item></number-item>
@@ -121,24 +140,26 @@ export default defineComponent({
 
     const curGetDetailById = async () => {    
       const id = router.currentRoute.value.query.c;
-      const { data, code } = await getDetailById({id})
+      // 12345169829022128471
+      const { data } = await getDetailById({ genCode: id })
       const { scanNumber } = data || {};
       detail.scanNumber = scanNumber;
     }
     
     const toScan = () => {
+      const id = router.currentRoute.value.query.c;
       console.log('toScan !!!');
-      
-      router.push(`/s`)
+      router.push(`/s?c=${id}`)
     }
   
     const toDetail = () => {
-      router.push(`/d`)
+      const id = router.currentRoute.value.query.c;
+      router.push(`/d?c=${id}`)
     }
 
     const toVerify = () => {
-      console.log('toVerify');
-      router.push(`/v`)
+      const id = router.currentRoute.value.query.c;
+      router.push(`/v?c=${id}`)
     }
 
     onMounted(() => {
@@ -216,6 +237,14 @@ export default defineComponent({
       height: 100%;
       border-radius: 6px;
       background: url('../../assets/hel1.png') no-repeat;
+      background-size: 100%;
+      position: relative;
+    }
+    .info_wrapper_body_boxs_new {
+      width: 100%;
+      height: 100%;
+      border-radius: 6px;
+      background: url('../../assets/hel12.jpg') no-repeat;
       background-size: 100%;
       position: relative;
     }

@@ -6,10 +6,10 @@ import {
   NavBar, Radio, RadioGroup,
   Checkbox, CheckboxGroup,
   CollapseItem,
-  Collapse
+  Collapse, Steps, Step
 } from 'vant'
 
-const plugins = [Button, Icon,
+const plugins = [Button, Icon, Steps, Step,
   Cell, Popup, Picker, CellGroup, Tabbar, TabbarItem,
   VanImage, Form, Field, NavBar, Radio,
   RadioGroup, Checkbox, CheckboxGroup, CollapseItem, Collapse]

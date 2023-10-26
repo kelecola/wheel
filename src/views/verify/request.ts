@@ -1,11 +1,9 @@
 import request from '@/utils/request'
 
 
-export const apiScan = (params: any) => {
-  console.log('params', params);
-
+export const getVerDetailById = (params: any) => {
   return request({
-    url: '/api/hel/scan',
+    url: '/api/hel/verDetail',
     method: 'post',
     data: params,
     loading: true

@@ -1,8 +1,12 @@
 <!-- Rem -->
 <template>
   <div class="verify_wrapper">
-    <div class="v_top">
-      <div class="v_top_title1">{{numberStr}}</div>
+    <div v-if="detail?.data?.record?.length !== 0" class="v_top">
+      <div class="v_top_title1">{{curIds}}</div>
+      <div class="v_top_title2">{{title}}</div>
+    </div>
+    <div v-else class="v_top_new">
+      <div class="v_top_title1">{{curIds}}</div>
       <div class="v_top_title2">{{title}}</div>
     </div>
     <div class="v_body">
@@ -10,7 +14,7 @@
         <div class="row1_left"></div>
         <div class="row1_right">
           <span>总扫码人数</span>
-          <span class="row1_number">{{scanNum}}</span>
+          <span class="row1_number">{{detail?.data?.record?.length || 0}}</span>
           <span>人</span>
         </div>
       </div>
@@ -19,12 +23,65 @@
         <div class="row3_left"></div>
         <div class="row3_right">{{row3}}</div>
       </div>
-      <div class="row4">{{`有效期至：${validTime}`}}</div>
+      <div class="row4">{{`有效期至：${detail?.data?.product?.periodValidityTime}`}}</div>
     </div>
     <div class="v_info">
       <div class="v_title">验证明细</div>
-      <div class="v_pro"></div>
-      <div class="v_use"></div>
+      <van-steps direction="vertical" active="-1">
+        <van-step>
+          <template #inactive-icon>
+            <div class="relative">
+              <img src="../../assets/hel9.jpg" />
+            </div>
+          </template>
+          <div class="v_sub_title">生产信息</div>
+          <div class="v_sub_info">
+            <div>生产厂家</div>
+            <div>漳州片仔癀药业股份有限公司</div>
+          </div>
+          <div class="v_sub_info">
+            <div>生产日期</div>
+            <div>2023-05-28</div>
+          </div>
+          <div class="v_sub_info">
+            <div>药品批号</div>
+            <div>05281000</div>
+          </div>
+        </van-step>
+        <van-step>
+          <template #inactive-icon>
+            <div class="relative">
+              <img src="../../assets/hel9.jpg" />
+            </div>
+          </template>
+          <div class="v_sub_title">使用信息</div>
+          <div v-for="(item, index) in detail.data.record" :key="index" class="v_sub_info_wrapper">
+            <div class="v_sub_info">
+              <div>{{item?.key === 'my' ? '本人扫码' : '有人扫码'}}</div>
+              <div>{{`总计扫码${item?.value || '未知'}次`}}</div>
+            </div>
+            <div v-if="!!(item && item.scanAt)">
+              <div v-for="(it, i) in item.scanAt" :key="i" class="v_sub_info_items">
+                <div class="v_sub_info_items_left">{{ it.addtess }}</div>
+                <div class="v_sub_info_items_right">{{ it.time }}</div>
+              </div>
+            </div>
+          </div>
+        </van-step>
+        <van-step>
+          <template #inactive-icon>
+            <div class="relative">
+              <img src="../../assets/hel9.jpg" />
+            </div>
+          </template>
+          <div class="v_sub_title">药品效期</div>
+          <div class="v_sub_info">
+            <div>药品效期</div>
+            <div>2024-06-14</div>
+          </div>
+        </van-step>
+      </van-steps>
+
     </div>
   </div>
 </template>
@@ -33,36 +90,116 @@
 import { defineComponent, onMounted, reactive, toRefs, ref } from 'vue'
 import { useRouter } from 'vue-router';
 import { verifyArr } from './mock'
+import { getVerDetailById } from './request'
+
 
 export default defineComponent({
   name: 'Question',
   props: {},
   setup() {
+    // const record: any[] = ref([]);
     const isFirst = ref(false)
-    const numberStr = ref('81006  10750  90274  01875');
     const title = '药品被多人验证'
-    const scanNum  = 58
-    const validTime = '2024-06-14'
+    // let scanNum  = 0
+    // let validTime = '2024-06-14'
     const row3 = '在有效期内'
-    onMounted(() => {
+    const router = useRouter();
+    const detail = reactive<any>({
+      data: {
+        record: [],
+        product: {}
+      }
+    });
+
+    let curIds = ''
+    if (router.currentRoute.value.query.c) {
+      curIds = `${router.currentRoute.value.query.c.slice(0, 5)} ${router.currentRoute.value.query.c.slice(5, 10)} ${router.currentRoute.value.query.c.slice(10, 15)} ${router.currentRoute.value.query.c.slice(15, 19)}`
+    }
+
+    const curGetDetailById = async () => {    
+      const id = router.currentRoute.value.query.c;
+      // 12345169829022128471
+      const { data } = await getVerDetailById({ genCode: id })
+      detail.data = data
+      // {
+      //   ...data,
+      //   record: JSON.parse(JSON.stringify(data?.record)) 
+      // }
+
+      // console.log('123123', {
+      //   ...data,
+      //   record: JSON.parse(JSON.stringify(data?.record)) 
+      // });
+
       
+      
+      /* eslint-disable */
+      // detail.data.record = JSON.parse(JSON.stringify(
+      //   Array.from(detail?.data?.record || []).map((item: any) => {
+      //   const obj = {
+      //     key: item.key,
+      //     value: item.value,
+      //     scanAt: item.scanAt,
+      //   }
+      //   return obj;
+      // })
+      // )) 
+      
+      
+    }
+    
+    onMounted(() => {
+      curGetDetailById()
     });
 
     return {
-      numberStr,
       title,
-      scanNum,
-      validTime,
       isFirst,
       verifyArr,
-      row3
+      row3,
+      detail,
+      curGetDetailById,
+      curIds,
     };
   },
 })
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .verify_wrapper {
+  ::v-deep([class*='van-hairline']:after) {
+    border: 0 dashed var(--van-border-color);
+  }
+
+  .relative {
+    img {
+      height: 24px;
+      width: 24px;
+    }
+  }
   position: relative;
+  .v_top_new {
+    width: 100%;
+    height: 190px;
+    background: url('../../assets/hel13.jpg') no-repeat;
+    background-size: 100%;
+    position: relative;
+    color: #fff;
+    &_title1 {
+      position: absolute;
+      top: 28px;
+      left: 42px;
+      color: #fff;
+      font-size: 16px;
+    }
+    &_title2 {
+      position: absolute;
+      top: 60px;
+      left: 16px;
+      color: #fff;
+      font-size: 25px;
+      letter-spacing: 1px;
+    }
+  }
   .v_top {
     width: 100%;
     height: 190px;
@@ -163,11 +300,29 @@ export default defineComponent({
     box-sizing: border-box;
     background-color: #fff;
     margin-top: 128px;
-    .v-title {
+    .v_title {
       font-size: 20px;
       font-weight: bold;
       color: rgba(0,0,0,0.9);
+      margin-bottom: 12px;
     }
+  }
+  .v_sub_title {
+    color: #41485d;
+    font-size: 20px;
+    line-height: 28px;
+    margin-top: -7px;
+  }
+  .v_sub_info {
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    line-height: 32px;
+  }
+  .v_sub_info_items {
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
   }
 }
 
