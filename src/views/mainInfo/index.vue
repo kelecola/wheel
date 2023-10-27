@@ -9,19 +9,16 @@
       </div>
     </div>
     <div class="info_wrapper_body">
-      <div v-if="detail.scanNumber === 0" class="info_wrapper_body_boxs_new">
-        <number-item></number-item>
-        <number-item></number-item>
-        <number-item></number-item>
-        <number-item></number-item>
+      <div v-if="detail.scanNumber === 1" class="info_wrapper_body_boxs_new">
+        <div class="v_top_title1">{{curIds}}</div>
         <div class="info_line_wrapper">
-          <div class="info_line1">
-            <span>药品被多人验证</span>
+          <div class="info_line1_green">
+            <span>药品追溯码验证通过</span>
           </div>
           <div class="info_line2">
-            <span>药品已被</span>
-            <span class="info_line2_number">{{detail.scanNumber}}</span>
-            <span>人扫码查询</span>
+            <span>总扫码人数</span>
+            <span class="info_line2_number_green">{{detail.scanNumber}}</span>
+            <span>人，且在有效期内</span>
           </div>
           <div class="info_line3">
             <div class="info_button" @click="toVerify">验证详情 ></div>
@@ -29,10 +26,7 @@
         </div>
       </div>
       <div v-else class="info_wrapper_body_boxs">
-        <number-item></number-item>
-        <number-item></number-item>
-        <number-item></number-item>
-        <number-item></number-item>
+        <div class="v_top_title1">{{curIds}}</div>
         <div class="info_line_wrapper">
           <div class="info_line1">
             <span>药品被多人验证</span>
@@ -119,7 +113,7 @@ import NumberItem from './NumberItem.vue'
 // import Qrcode from './QrcodeReader.vue'
 import { useRouter } from "vue-router";
 import { Toast } from 'vant';
-import { getDetailById } from './request'
+import { getDetailById, apiScan } from './request'
 import { Html5Qrcode } from 'html5-qrcode';
 
 export default defineComponent({
@@ -137,6 +131,19 @@ export default defineComponent({
     let html5QrCode = ref<any>(null);
 
     const router = useRouter();
+
+    let curIds = ''
+    if (router.currentRoute.value.query.c) {
+      curIds = `${router.currentRoute.value.query.c.slice(0, 5)}\u00A0\u00A0\u00A0${router.currentRoute.value.query.c.slice(5, 10)}\u00A0\u00A0\u00A0${router.currentRoute.value.query.c.slice(10, 15)}\u00A0\u00A0\u00A0${router.currentRoute.value.query.c.slice(15, 20)}`
+    }
+
+    console.log('curIds', curIds);
+
+    const curApiScan  = async () => {
+      const id = router.currentRoute.value.query.c;
+      const { data, code } = await apiScan({genCode: id})
+    }
+    
 
     const curGetDetailById = async () => {    
       const id = router.currentRoute.value.query.c;
@@ -164,6 +171,7 @@ export default defineComponent({
 
     onMounted(() => {
       curGetDetailById()
+      curApiScan();
     });
 
 
@@ -172,6 +180,8 @@ export default defineComponent({
       toDetail,
       toVerify,
       toScan,
+      curIds,
+      curApiScan,
       curGetDetailById
     };
   },
@@ -180,10 +190,25 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.v_top_title1 {
+  font-size: 14px;
+  position: absolute;
+  top: 64px;
+  left: 18px;
+  color: rgba(0, 0, 0, 0.6)
+}
 .info_line_wrapper {
   position: absolute;
   bottom: 20px;
   left: 16px;
+}
+.info_line1_green{
+  font-size: 20px;
+  color: #5CC576;
+  font-family: '苹方-简';
+}
+.info_line2_number_green {
+  color: #5CC576
 }
 .info_line1 {
   font-size: 20px;

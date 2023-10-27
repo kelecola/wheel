@@ -9,7 +9,7 @@
 import { defineComponent, ref, reactive, onMounted, onUnmounted } from 'vue'
 // import Qrcode from './QrcodeReader.vue'
 import { useRouter } from "vue-router";
-import { apiScan } from './request'
+// import { apiScan } from './request'
 import { Html5Qrcode } from 'html5-qrcode';
 
 export default defineComponent({
@@ -25,10 +25,6 @@ export default defineComponent({
 
     const router = useRouter();
 
-    const curApiScan  = async (genCode: any) => {
-      const id = router.currentRoute.value.query.c;
-      const { data, code } = await apiScan({genCode})
-    }
     
     const getCameras = () => {
       Html5Qrcode.getCameras()
@@ -70,8 +66,8 @@ export default defineComponent({
             // }
             console.log('扫描的结果', decodedText, decodedResult);
             if (decodedText) {
-              curApiScan(decodedText)
-              window.location.href = `https://pzh6.com/?c=${decodedText}`
+              window.location.href = decodedText
+              // `https://pzh6.com/?c=${decodedText}`
             }
           },
           (errorMessage: any) => {

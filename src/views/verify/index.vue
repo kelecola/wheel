@@ -1,29 +1,32 @@
 <!-- Rem -->
 <template>
   <div class="verify_wrapper">
-    <div v-if="detail?.data?.record?.length !== 0" class="v_top">
+    <div v-if="detail?.data?.record?.length !== 1" class="v_top">
       <div class="v_top_title1">{{curIds}}</div>
       <div class="v_top_title2">{{title}}</div>
     </div>
     <div v-else class="v_top_new">
       <div class="v_top_title1">{{curIds}}</div>
-      <div class="v_top_title2">{{title}}</div>
+      <div class="v_top_icon"></div>
+      <div class="v_top_title2">追溯码验证通过</div>
     </div>
     <div class="v_body">
       <div class="row1">
-        <div class="row1_left"></div>
+        <div v-if="detail?.data?.record?.length === 1" class="row1_left_green"></div>
+        <div v-else class="row1_left"></div>
         <div class="row1_right">
           <span>总扫码人数</span>
-          <span class="row1_number">{{detail?.data?.record?.length || 0}}</span>
+          <span class="row1_number">{{detail?.data?.record?.length || ''}}</span>
           <span>人</span>
         </div>
       </div>
-      <div class="row2">药品被多人验证</div>
+      <div class="row2">{{detail?.data?.record?.length !== 1 ? '药品被多人验证' : `首次扫码时间${detail?.data?.product?.manufacturerTime || '未知'}，扫码明细见下方`}}</div>
       <div class="row3">
-        <div class="row3_left"></div>
+        <div v-if="detail?.data?.record?.length === 1" class="row3_left_green"></div>
+        <div v-else class="row3_left"></div>
         <div class="row3_right">{{row3}}</div>
       </div>
-      <div class="row4">{{`有效期至：${detail?.data?.product?.periodValidityTime}`}}</div>
+      <div class="row4">{{`有效期至：${detail?.data?.product?.periodValidityTime || ''}`}}</div>
     </div>
     <div class="v_info">
       <div class="v_title">验证明细</div>
@@ -113,7 +116,7 @@ export default defineComponent({
 
     let curIds = ''
     if (router.currentRoute.value.query.c) {
-      curIds = `${router.currentRoute.value.query.c.slice(0, 5)} ${router.currentRoute.value.query.c.slice(5, 10)} ${router.currentRoute.value.query.c.slice(10, 15)} ${router.currentRoute.value.query.c.slice(15, 19)}`
+      curIds = `${router.currentRoute.value.query.c.slice(0, 5)} ${router.currentRoute.value.query.c.slice(5, 10)} ${router.currentRoute.value.query.c.slice(10, 15)} ${router.currentRoute.value.query.c.slice(15, 20)}`
     }
 
     const curGetDetailById = async () => {    
@@ -184,6 +187,15 @@ export default defineComponent({
     background-size: 100%;
     position: relative;
     color: #fff;
+    .v_top_icon {
+      position: absolute;
+      top: 28px;
+      width: 24px;
+      height: 18px;
+      background: url('../../assets/hel14.png') no-repeat;
+      background-size: contain;
+      left: 16px;
+    }
     &_title1 {
       position: absolute;
       top: 28px;
@@ -265,7 +277,6 @@ export default defineComponent({
     .row2 {
       font-size: 14px;
       color: #909090;
-      margin-left: 40px;
       line-height: 24px;
     }
     .row3 {
@@ -290,7 +301,6 @@ export default defineComponent({
     .row4 {
       font-size: 14px;
       color: #909090;
-      margin-left: 40px;
       line-height: 24px;
     }
   }

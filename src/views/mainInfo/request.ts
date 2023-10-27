@@ -12,11 +12,12 @@ export const getDetailById = (params: any) => {
   })
 }
 
+
 export const apiScan = (params: any) => {
   console.log('params', params);
 
   return request({
-    url: '/api/scan',
+    url: '/api/hel/scan',
     method: 'post',
     data: params,
     loading: true
