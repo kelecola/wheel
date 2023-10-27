@@ -1,7 +1,7 @@
 <!-- Rem -->
 <template>
   <div class="verify_wrapper">
-    <div v-if="detail?.data?.record?.length !== 1" class="v_top">
+    <div v-if="detail?.data?.record?.[1]?.value !== 0" class="v_top">
       <div class="v_top_title1">{{curIds}}</div>
       <div class="v_top_title2">{{title}}</div>
     </div>
@@ -12,17 +12,17 @@
     </div>
     <div class="v_body">
       <div class="row1">
-        <div v-if="detail?.data?.record?.length === 1" class="row1_left_green"></div>
+        <div v-if="detail?.data?.record?.[1]?.value === 0" class="row1_left_green"></div>
         <div v-else class="row1_left"></div>
         <div class="row1_right">
           <span>总扫码人数</span>
-          <span class="row1_number">{{detail?.data?.record?.length || ''}}</span>
+          <span class="row1_number">{{detail?.data?.record?.[1]?.value !== undefined ? detail?.data?.record?.[1]?.value + 1 : ''}}</span>
           <span>人</span>
         </div>
       </div>
-      <div class="row2">{{detail?.data?.record?.length !== 1 ? '药品被多人验证' : `首次扫码时间${detail?.data?.product?.manufacturerTime || '未知'}，扫码明细见下方`}}</div>
+      <div class="row2">{{detail?.data?.record?.[1]?.value !== 0 ? '药品被多人验证' : `首次扫码时间${detail?.data?.product?.manufacturerTime || '未知'}，扫码明细见下方`}}</div>
       <div class="row3">
-        <div v-if="detail?.data?.record?.length === 1" class="row3_left_green"></div>
+        <div v-if="detail?.data?.record?.[1]?.value === 0" class="row3_left_green"></div>
         <div v-else class="row3_left"></div>
         <div class="row3_right">{{row3}}</div>
       </div>
@@ -59,9 +59,11 @@
           </template>
           <div class="v_sub_title">使用信息</div>
           <div v-for="(item, index) in detail.data.record" :key="index" class="v_sub_info_wrapper">
-            <div class="v_sub_info">
-              <div>{{item?.key === 'my' ? '本人扫码' : '有人扫码'}}</div>
-              <div>{{`总计扫码${item?.value || '未知'}次`}}</div>
+            <div v-if="!!item?.value">
+              <div class="v_sub_info">
+                <div>{{item?.key === 'my' ? '本人扫码' : '有人扫码'}}</div>
+                <div>{{`总计扫码${item?.value || '未知'}次`}}</div>
+              </div>
             </div>
             <div v-if="!!(item && item.scanAt)">
               <div v-for="(it, i) in item.scanAt" :key="i" class="v_sub_info_items">

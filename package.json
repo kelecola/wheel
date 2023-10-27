@@ -22,6 +22,7 @@
     "canvas-confetti": "1.4.0",
     "core-js": "^3.6.5",
     "html5-qrcode": "^2.3.8",
+    "lodash": "^4.17.21",
     "vant": "^3.0.6",
     "vconsole": "^3.4.0",
     "vue": "^3.0.0",
@@ -33,6 +34,7 @@
     "weixin-js-sdk": "^1.6.0"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.200",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
     "@vue/cli-plugin-babel": "~4.5.0",

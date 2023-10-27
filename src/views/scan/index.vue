@@ -11,6 +11,7 @@ import { defineComponent, ref, reactive, onMounted, onUnmounted } from 'vue'
 import { useRouter } from "vue-router";
 // import { apiScan } from './request'
 import { Html5Qrcode } from 'html5-qrcode';
+import { debounce } from 'lodash';
 
 export default defineComponent({
   name: 'Info',
@@ -66,7 +67,7 @@ export default defineComponent({
             // }
             console.log('扫描的结果', decodedText, decodedResult);
             if (decodedText) {
-              window.location.href = decodedText
+              debounce(() => {window.location.href = decodedText}, 500)()
               // `https://pzh6.com/?c=${decodedText}`
             }
           },
