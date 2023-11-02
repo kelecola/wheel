@@ -6,6 +6,7 @@ const name = defaultSettings.title || ''
 const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
 
 module.exports = {
+  // history: 'hash',
   // lintOnSave: true, // lint检查
   lintOnSave: !IS_PROD, // lint检查
   publicPath: '/', // 署应用包时的基本 URL。 vue-router hash 模式使用

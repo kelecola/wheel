@@ -5,21 +5,6 @@ export const constantRouterMap: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'info',
-    component: () => import('@/views/mainInfo/index.vue'),
-  },
-  {
-    path: '/d',
-    name: 'detail',
-    component: () => import('@/views/detail/index.vue'),
-  },
-  {
-    path: '/v',
-    name: 'verify',
-    component: () => import('@/views/verify/index.vue'),
-  },
-  {
-    path: '/s',
-    name: 'scan',
-    component: () => import('@/views/scan/index.vue'),
+    component: () => import('@/views/lutou/index.vue')
   }
 ]
