@@ -117,12 +117,12 @@ export default defineComponent({
     });
 
     let curIds = ''
-    if (router.currentRoute.value.query.c) {
-      curIds = `${router.currentRoute.value.query.c.slice(0, 5)} ${router.currentRoute.value.query.c.slice(5, 10)} ${router.currentRoute.value.query.c.slice(10, 15)} ${router.currentRoute.value.query.c.slice(15, 20)}`
+    if (router.currentRoute.value.query.code) {
+      curIds = `${router.currentRoute.value.query.code.slice(0, 5)} ${router.currentRoute.value.query.code.slice(5, 10)} ${router.currentRoute.value.query.code.slice(10, 15)} ${router.currentRoute.value.query.code.slice(15, 20)}`
     }
 
     const curGetDetailById = async () => {    
-      const id = router.currentRoute.value.query.c;
+      const id = router.currentRoute.value.query.code;
       // 12345169829022128471
       const { data } = await getVerDetailById({ genCode: id })
       detail.data = data

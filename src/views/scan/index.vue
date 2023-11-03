@@ -68,7 +68,7 @@ export default defineComponent({
             console.log('扫描的结果', decodedText, decodedResult);
             if (decodedText) {
               debounce(() => {window.location.href = decodedText}, 500)()
-              // `https://pzh6.com/?c=${decodedText}`
+              // `https://pzh6.com/?code=${decodedText}`
             }
           },
           (errorMessage: any) => {

@@ -133,20 +133,20 @@ export default defineComponent({
     const router = useRouter();
 
     let curIds = ''
-    if (router.currentRoute.value.query.c) {
-      curIds = `${router.currentRoute.value.query.c.slice(0, 5)}\u00A0\u00A0\u00A0${router.currentRoute.value.query.c.slice(5, 10)}\u00A0\u00A0\u00A0${router.currentRoute.value.query.c.slice(10, 15)}\u00A0\u00A0\u00A0${router.currentRoute.value.query.c.slice(15, 20)}`
+    if (router.currentRoute.value.query.code) {
+      curIds = `${router.currentRoute.value.query.code.slice(0, 5)}\u00A0\u00A0\u00A0${router.currentRoute.value.query.code.slice(5, 10)}\u00A0\u00A0\u00A0${router.currentRoute.value.query.code.slice(10, 15)}\u00A0\u00A0\u00A0${router.currentRoute.value.query.code.slice(15, 20)}`
     }
 
     console.log('curIds', curIds);
 
     const curApiScan  = async () => {
-      const id = router.currentRoute.value.query.c;
+      const id = router.currentRoute.value.query.code;
       const { data, code } = await apiScan({genCode: id})
     }
     
 
     const curGetDetailById = async () => {    
-      const id = router.currentRoute.value.query.c;
+      const id = router.currentRoute.value.query.code;
       // 12345169829022128471
       const { data } = await getDetailById({ genCode: id })
       const { scanNumber } = data || {};
@@ -154,19 +154,19 @@ export default defineComponent({
     }
     
     const toScan = () => {
-      const id = router.currentRoute.value.query.c;
+      const id = router.currentRoute.value.query.code;
       console.log('toScan !!!');
-      router.push(`/s?c=${id}`)
+      router.push(`/s?code=${id}`)
     }
   
     const toDetail = () => {
-      const id = router.currentRoute.value.query.c;
-      router.push(`/d?c=${id}`)
+      const id = router.currentRoute.value.query.code;
+      router.push(`/d?code=${id}`)
     }
 
     const toVerify = () => {
-      const id = router.currentRoute.value.query.c;
-      router.push(`/v?c=${id}`)
+      const id = router.currentRoute.value.query.code;
+      router.push(`/v?code=${id}`)
     }
 
     onMounted(() => {

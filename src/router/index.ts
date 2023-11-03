@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import { constantRouterMap } from './router.config'
 import { useDocumentTitle } from '@/hooks/useDocumentTitle'
 import { getQueryParams, phoneModel } from '@/utils'
@@ -11,7 +11,7 @@ interface IQueryParams {
 }
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHashHistory(process.env.BASE_URL),
   // 在按下 后退/前进 按钮时，就会像浏览器的原生表现那样
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
