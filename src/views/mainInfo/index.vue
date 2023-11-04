@@ -278,14 +278,6 @@ export default defineComponent({
       background-size: 100%;
       position: relative;
     }
-    .info_wrapper_body_boxs_code {
-        height: 24px;
-        width: 196px;
-        top: 32px;
-        left: 18px;
-        position: absolute;
-        background: url('../../assets/code.jpg') no-repeat;
-      }
     .info_wrapper_body_boxs_new {
       width: 100%;
       height: 100%;
@@ -293,6 +285,15 @@ export default defineComponent({
       background: url('../../assets/hel12.jpg') no-repeat;
       background-size: 100%;
       position: relative;
+    }
+    .info_wrapper_body_boxs_code {
+      height: 54px;
+      width: 224px;
+      top: 4px;
+      left: 4px;
+      position: absolute;
+      background: url('../../assets/code.jpg') no-repeat;
+      background-size: cover;
     }
   }
   .info_wrapper_drug_wrapper {
