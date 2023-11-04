@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="info_wrapper_body">
-      <div v-if="detail.scanNumber === 0" class="info_wrapper_body_boxs_new">
+      <div v-if="detail.scanNumber === 0 || detail.scanNumber === 1" class="info_wrapper_body_boxs_new">
         <div class="info_wrapper_body_boxs_code"></div>
         <div class="v_top_title1">{{curIds}}</div>
         <div class="info_line_wrapper">
@@ -19,7 +19,7 @@
           </div>
           <div class="info_line2">
             <span>总扫码人数</span>
-            <span class="info_line2_number_green">{{detail.scanNumber !== undefined ? detail.scanNumber + 1 : ''}}</span>
+            <span class="info_line2_number_green">{{detail.scanNumber === 0 ? 1 : detail.scanNumber}}</span>
             <span>人，且在有效期内</span>
           </div>
           <div class="info_line3">
@@ -35,7 +35,7 @@
           </div>
           <div class="info_line2">
             <span>药品已被</span>
-            <span class="info_line2_number">{{detail.scanNumber ? detail.scanNumber + 1 : ''}}</span>
+            <span class="info_line2_number">{{detail.scanNumber === 0 ? 1 : detail.scanNumber}}</span>
             <span>人扫码查询</span>
           </div>
           <div class="info_line3">
