@@ -41,6 +41,7 @@
 <script lang="ts">
 import { defineComponent, onMounted, reactive, toRefs, ref } from 'vue'
 import { useRouter } from 'vue-router';
+import { getDetailById } from './request'
 
 export default defineComponent({
   name: 'Question',
@@ -48,11 +49,36 @@ export default defineComponent({
   setup() {
     const activeNames = ref(['']);
     const showPicker = ref(false);
-    // todo: 改动点
-    const items2 = [{"k":"药品生产日期","type":"生产信息","v":"2023-05-28 00:00:00"},{"k":"药品有效期截至日期","type":"生产信息","v":"2024-06-14 00:00:00"},{"k":"药品生产批号","type":"生产信息","v":"05281000"}];
-    const items1 = [
+
+    const detail = reactive<any>({
+      scanNumber: 0
+    });
+
+    const items1 = reactive<any>([
       {"k":"药品通用名称(中文)","type":"基本信息","v":"片仔癀"},{"k":"药品商品名称 (中文)","type":"基本信息","v":"片仔癀"},{"k":"国家药品标识码","type":"基本信息","v":"04879001203"},{"k":"药品本位码","type":"基本信息","v":"86904879000126"},{"k":"剂型","type":"基本信息","v":"锭剂"},{"k":"制剂规格","type":"基本信息","v":"每粒重3g"},{"k":"包装规格","type":"基本信息","v":"1粒/盒"},{"k":"包装转换比","type":"基本信息","v":"1"},{"k":"药品有效期","type":"基本信息","v":"60月"},{"k":"药品批准文号","type":"基本信息","v":"国药准字Z35020243"},{"k":"药品批准文号有效期","type":"基本信息","v":"2025-03-15 00:00:00"},
-    ];
+    ]);
+
+    const items2 = reactive<any>(
+      [{"k":"药品生产日期","type":"生产信息","v":"2023-05-28 00:00:00"},{"k":"药品有效期截至日期","type":"生产信息","v":"2024-06-14 00:00:00"},{"k":"药品生产批号","type":"生产信息","v":"05281000"}]
+    )
+
+    const router = useRouter();
+
+    const curGetDetailById = async () => {    
+      // loading.value = true;
+      const id = router.currentRoute.value.query.code;
+      // 12345169829022128471
+      // try {
+      const { data } = await getDetailById({ genCode: id })
+      const { product } = data || {};
+      const { drugBatchNumber, manufacturerTime, periodValidityTime } = product;
+      items2[0].v = manufacturerTime
+      items2[1].v = periodValidityTime
+      items2[2].v = drugBatchNumber
+
+    }
+
+    // todo: 改动点
     const items3 = [
       {"k":"药品注册分类","type":"类别属性","v":"中药"},{"k":"国家基本药物标识","type":"类别属性","v":"否"},{"k":"处方药标识","type":"类别属性","v":"否"},
     ];
@@ -64,6 +90,7 @@ export default defineComponent({
     const resData: any = reactive({
       activeNames: ['basic'],
       info: [],
+      detail,
       items1,
       items2,
       items3,
@@ -71,7 +98,7 @@ export default defineComponent({
     });
 
     onMounted(() => {
-      
+      curGetDetailById();
     });
 
     return {

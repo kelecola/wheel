@@ -1,5 +1,6 @@
 <template>
   <div class="info_wrapper">
+    <!-- <van-loading v-model:show="loading" text="加载中..." :fullscreen="true" /> -->
     <div class="info_wrapper_header">
       <div class="info_wrapper_header_left">
         <img class="image" src="../../assets/hel4.jpg" />
@@ -10,6 +11,7 @@
     </div>
     <div class="info_wrapper_body">
       <div v-if="detail.scanNumber === 0" class="info_wrapper_body_boxs_new">
+        <div class="info_wrapper_body_boxs_code"></div>
         <div class="v_top_title1">{{curIds}}</div>
         <div class="info_line_wrapper">
           <div class="info_line1_green">
@@ -124,10 +126,14 @@ export default defineComponent({
   },
   
   setup() {
-    const detail = reactive<any>({});
+    const detail = reactive<any>({
+      scanNumber: 0
+    });
+    
+    const loading = ref(false); // 控制Loading组件的显示与隐藏
 
-    let cameraId = ref('');
-    let devicesInfo = ref<any>('');
+    // let cameraId = ref('');
+    // let devicesInfo = ref<any>('');
     let html5QrCode = ref<any>(null);
 
     const router = useRouter();
@@ -146,11 +152,16 @@ export default defineComponent({
     
 
     const curGetDetailById = async () => {    
+      // loading.value = true;
       const id = router.currentRoute.value.query.code;
       // 12345169829022128471
+      // try {
       const { data } = await getDetailById({ genCode: id })
       const { scanNumber } = data || {};
       detail.scanNumber = scanNumber;
+      // }  finally {
+      //   loading.value = false;
+      // }
     }
     
     const toScan = () => {
@@ -169,6 +180,7 @@ export default defineComponent({
       router.push(`/v?code=${id}`)
     }
 
+
     onMounted(() => {
       curGetDetailById()
       curApiScan();
@@ -182,7 +194,8 @@ export default defineComponent({
       toScan,
       curIds,
       curApiScan,
-      curGetDetailById
+      curGetDetailById,
+      loading
     };
   },
   
@@ -265,6 +278,14 @@ export default defineComponent({
       background-size: 100%;
       position: relative;
     }
+    .info_wrapper_body_boxs_code {
+        height: 24px;
+        width: 196px;
+        top: 32px;
+        left: 18px;
+        position: absolute;
+        background: url('../../assets/code.jpg') no-repeat;
+      }
     .info_wrapper_body_boxs_new {
       width: 100%;
       height: 100%;

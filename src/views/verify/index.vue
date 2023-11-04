@@ -44,11 +44,11 @@
           </div>
           <div class="v_sub_info">
             <div>生产日期</div>
-            <div>2023-05-28</div>
+            <div>{{detail?.data?.product?.manufacturerTime}}</div>
           </div>
           <div class="v_sub_info">
             <div>药品批号</div>
-            <div>05281000</div>
+            <div>{{detail?.data?.product?.drugBatchNumber}}</div>
           </div>
         </van-step>
         <van-step>
@@ -82,7 +82,7 @@
           <div class="v_sub_title">药品效期</div>
           <div class="v_sub_info">
             <div>药品效期</div>
-            <div>2024-06-14</div>
+            <div>{{detail?.data?.product?.periodValidityTime}}</div>
           </div>
         </van-step>
       </van-steps>
