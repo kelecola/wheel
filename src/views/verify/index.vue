@@ -20,7 +20,7 @@
           <span>人</span>
         </div>
       </div>
-      <div class="row2">{{detail?.data?.record?.[1]?.value !== 0 ? '药品被多人验证' : `首次扫码时间${detail?.data?.product?.manufacturerTime || '未知'}，扫码明细见下方`}}</div>
+      <div class="row2">{{detail?.data?.record?.[1]?.value !== 0 ? '药品被多人验证' : `首次扫码时间${firstTime || '未知'}，扫码明细见下方`}}</div>
       <div class="row3">
         <div v-if="detail?.data?.record?.[1]?.value === 0" class="row3_left_green"></div>
         <div v-else class="row3_left"></div>
@@ -97,7 +97,6 @@ import { useRouter } from 'vue-router';
 import { verifyArr } from './mock'
 import { getVerDetailById } from './request'
 
-
 export default defineComponent({
   name: 'Question',
   props: {},
@@ -109,9 +108,10 @@ export default defineComponent({
     // let validTime = '2024-06-14'
     const row3 = '在有效期内'
     const router = useRouter();
+    const firstTime = ref('未知');
     const detail = reactive<any>({
       data: {
-        record: [],
+        record: [{}, { value: 0}],
         product: {}
       }
     });
@@ -126,6 +126,9 @@ export default defineComponent({
       // 12345169829022128471
       const { data } = await getVerDetailById({ genCode: id })
       detail.data = data
+      const myScanAt = detail.data?.record?.[0]?.scanAt;
+      const len = myScanAt.length;
+      firstTime.value = myScanAt[len - 1].time
       // {
       //   ...data,
       //   record: JSON.parse(JSON.stringify(data?.record)) 
@@ -163,6 +166,7 @@ export default defineComponent({
       verifyArr,
       row3,
       detail,
+      firstTime,
       curGetDetailById,
       curIds,
     };
