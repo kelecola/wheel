@@ -8,6 +8,11 @@ export const constantRouterMap: Array<RouteRecordRaw> = [
     component: () => import('@/views/mainInfo/index.vue'),
   },
   {
+    path: '/t/:id',
+    name: 'trans',
+    component: () => import('@/views/trans/index.vue'),
+  },
+  {
     path: '/d',
     name: 'detail',
     component: () => import('@/views/detail/index.vue'),
