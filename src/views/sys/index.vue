@@ -314,8 +314,8 @@ export default defineComponent({
         periodValidityTime,
         sDetail,
         sAdd,
-        fiveNumber,
-        addNumber,
+        fiveNumber = "",
+        addNumber = "",
         uName,
         nName,
         gcode,
@@ -339,7 +339,7 @@ export default defineComponent({
         vCode,
         isAdd: sAdd,
         fiveNumber,
-        addNumber: Number(addNumber),
+        addNumber: Number(addNumber) || 0,
         product: {
           genCode: "",
           drugSpecifications,
@@ -393,45 +393,48 @@ export default defineComponent({
       const { data, code, msg } = await genBatchUpdateAndAdd(params);
 
       if (code === "0000") {
-        axios
-          .post(
-            `/api/hel/idToCodeExcel`,
-            {
-              batchNum: drugBatchNumber,
-            },
-            {
-              responseType: "blob",
-            }
-          )
-          .then(({ data, headers }: any) => {
-            const contentDisposition = headers["content-disposition"];
-            const fileName = window.decodeURI(contentDisposition.split("=")[1]);
-            const blob = new Blob([data]);
-            const downloadBlob = (blob: any, fileName: string) => {
-              if (blob) {
-                // 创建一个URL对象，指向Blob对象
-                const url = window.URL.createObjectURL(blob);
-
-                // 创建一个<a>元素，用于触发下载
-                const link = document.createElement("a");
-                link.setAttribute("href", url);
-                link.setAttribute("download", fileName);
-                link.style.display = "none";
-
-                // 将<a>元素添加到DOM中，并触发下载
-                document.body.appendChild(link);
-                link.click();
-
-                // 释放URL对象
-                window.URL.revokeObjectURL(url);
-              } else {
-                message.error("下载失败！");
+        if (sAdd) {
+          axios
+            .post(
+              `/api/hel/idToCodeExcel`,
+              {
+                batchNum: drugBatchNumber,
+              },
+              {
+                responseType: "blob",
               }
-            };
-            downloadBlob(blob, fileName.replace(new RegExp('"', "g"), ""));
-          });
+            )
+            .then(({ data, headers }: any) => {
+              const contentDisposition = headers["content-disposition"];
+              const fileName = window.decodeURI(contentDisposition.split("=")[1]);
+              const blob = new Blob([data]);
+              const downloadBlob = (blob: any, fileName: string) => {
+                if (blob) {
+                  // 创建一个URL对象，指向Blob对象
+                  const url = window.URL.createObjectURL(blob);
 
-        Toast("导出成功！");
+                  // 创建一个<a>元素，用于触发下载
+                  const link = document.createElement("a");
+                  link.setAttribute("href", url);
+                  link.setAttribute("download", fileName);
+                  link.style.display = "none";
+
+                  // 将<a>元素添加到DOM中，并触发下载
+                  document.body.appendChild(link);
+                  link.click();
+
+                  // 释放URL对象
+                  window.URL.revokeObjectURL(url);
+                } else {
+                  Toast("下载失败！");
+                }
+              };
+              downloadBlob(blob, fileName.replace(new RegExp('"', "g"), ""));
+            });
+            Toast("导出成功！");
+        } else {
+          Toast("更新成功！");
+        }
       } else {
         Toast("创建成功, 导出失败！");
       }
