@@ -26,8 +26,8 @@ module.exports = {
     proxy: {
       '/api': {
         // target: "http://112.124.20.38:7201",
-        // target: "https://pzh6.com:8889",
-        target: "http://13.239.33.255:8889",
+        target: "http://a.pzh6.com:8889",
+        // target: "http://13.239.33.255:8889",
         // ws: true, // 是否启用websockets
         changOrigin: true, // 开启代理，在本地创建一个虚拟服务端
         // pathRewrite: {
