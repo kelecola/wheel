@@ -11,14 +11,6 @@
           placeholder="姓名"
           :rules="[{ required: true, message: '请填写姓名' }]"
         />
-        <!-- <van-field
-          v-model="identity"
-          type="identity"
-          name="identity"
-          label="身份证"
-          placeholder="身份证"
-          :rules="[{ required: true, message: '请填写身份证' }, { validator: isIdentity, message: '身份证号码格式错误！' }]"
-        /> -->
         <van-field
           v-model="phone"
           type="phone"
@@ -50,7 +42,6 @@ export default defineComponent({
   },
   setup() {
     const name = ref('');
-    const identity = ref('');
     const phone = ref('');
 
     const router = useRouter()
@@ -60,25 +51,21 @@ export default defineComponent({
     }
 
     const curCheckAnsed = async (params: any) => {
-      const { data: { step } } = await checkAnsed(params)
-      
-      const { name, identity, phone } = params;
-      if (step === 0) {
-        router.push(`/question/${identity}/${phone}/${name}`)
-        
-      } else if (!step) {
+      const { data: { step, phone: curPhone, name: curName } } = await checkAnsed(params)
+
+      if (step === undefined) {
+        // 未创建用户
         await curAddUser(params)
-        router.push(`/question/${identity}/${phone}/${name}`)
-        // router.push(`/askQuestion/${identity}/${phone}/${name}`)
-      }
-      // else if (step === 1) {
-      //   router.push(`/question/${identity}/${phone}/${name}`)
-      // } 
-      else if (step === 3 || step === 2) {
-        router.push(`/wheel/${identity}/${phone}/${name}`)
-      } else {
-        // router.push(`/question/${identity}/${phone}/${name}`)
-        router.push(`/askQuestion/${identity}/${phone}/${name}`)
+        router.push(`/askQuestion/${curPhone}/${curName}`)
+      } else if  (step === 1 || step === 0) {
+        // 创建了但是没有回答对
+        router.push(`/askQuestion/${curPhone}/${curName}`)
+      } else if  (step === 2) {
+        // 创建了回答对，但是还没有奖品
+        router.push(`/wheel/${curPhone}/${curName}`)
+      } else if (step === 3) {
+        // 抽过奖了
+        router.push(`/wheel/${curPhone}/${curName}`)
       }
     }
     
@@ -90,16 +77,10 @@ export default defineComponent({
       }
     };
 
-    const isIdentity = (val: any) => {
-      return /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(val);
-    }
-
     return {
       name,
-      identity,
       phone,
       onSubmit,
-      isIdentity
     };
   }
 })
