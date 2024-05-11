@@ -54,7 +54,7 @@ export default {
           activeSrc: require('../../assets/40.png'),
           width: '125%',
         }],}, // 3 0.5 - 1
-        { x: 2, y: 2, fonts: [{ text: '', top: '10%', winText: '恭喜获得三等奖', winFlag: true }], imgs: [{
+        { x: 2, y: 2, fonts: [{ text: '', top: '10%', winText: '谢谢参与', winFlag: false }], imgs: [{
           src: require('../../assets/5.png'),
           activeSrc: require('../../assets/50.png'),
           width: '125%',
@@ -115,7 +115,6 @@ export default {
       if (step === 2) {
         return true;
       }
-      needToast && Toast.fail('请先完成问卷！')
       return false;
     },
 
@@ -131,7 +130,7 @@ export default {
     },
     async curGetWinIndex (params: any) {
       const { data, restTimeToday } = await getWinIndex(params);
-      return { data: data || 1, restTimeToday };
+      return { data, restTimeToday };
     },
 
     async startCallback () {
@@ -142,7 +141,7 @@ export default {
 
       if (isPass) {
         // 模拟调用接口异步抽奖
-        let { data, restTimeToday }: any = await this.curGetWinIndex(params) || 1;
+        let { data, restTimeToday }: any = await this.curGetWinIndex(params);
 
         if (restTimeToday) {
           luckyRef.play();

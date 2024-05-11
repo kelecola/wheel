@@ -128,7 +128,7 @@ export default defineComponent({
         
         router.push(`/wheel/${resData.params.phone}/${resData.params.name}`)
       } else {
-        Toast.fail(`已答对${passNum}道，答对8道题以上，即可参与抽奖`)
+        Toast.fail(`已答对${passNum}道，答对7道题以上，即可参与抽奖`)
       }
     }
 
