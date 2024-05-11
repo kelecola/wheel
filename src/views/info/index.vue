@@ -56,16 +56,16 @@ export default defineComponent({
       if (step === undefined) {
         // 未创建用户
         await curAddUser(params)
-        router.push(`/askQuestion/${curPhone}/${curName}`)
+        router.push(`/askQuestion/${curPhone || phone.value}/${curName || name.value}`)
       } else if  (step === 1 || step === 0) {
         // 创建了但是没有回答对
-        router.push(`/askQuestion/${curPhone}/${curName}`)
+        router.push(`/askQuestion/${curPhone || phone.value}/${curName || name.value }`)
       } else if  (step === 2) {
         // 创建了回答对，但是还没有奖品
-        router.push(`/wheel/${curPhone}/${curName}`)
+        router.push(`/wheel/${curPhone || phone.value}/${curName || name.value}`)
       } else if (step === 3) {
         // 抽过奖了
-        router.push(`/wheel/${curPhone}/${curName}`)
+        router.push(`/wheel/${curPhone || phone.value}/${curName || name.value}`)
       }
     }
     
