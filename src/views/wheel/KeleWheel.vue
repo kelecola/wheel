@@ -1,12 +1,13 @@
 <template lang="">
   <div class="lucky-wheel-inter">
-    <LuckyWheel
+    <LuckyGrid
       ref="myLucky"
       width="350px"
       height="350px"
       :prizes="prizes"
       :blocks="blocks"
       :buttons="buttons"
+      :activeStyle="{ background: '#FDA5CF' }"
       @start="startCallback"
       @end="endCallback"
     />
@@ -29,32 +30,56 @@ export default {
   data() {
     const colorA = '#FEF3FC';
     const colorB = '#F8DEF8';
-    const blocks= [{ padding: '40px', imgs:[{ width: '350px', height: '350px' ,src: require('../../assets/zp3_bg.png')}], }]
+    const blocks= [{ padding: '25px 40px 40px 40px', imgs:[{ width: '350px', height: '350px' ,src: require('../../assets/bg.png')}], }]
     const prizes= [
-        { fonts: [{ text: '三等奖', top: '10%', winText: '恭喜获得三等奖', winFlag: true }], background: colorB }, // 8
-        { fonts: [{ text: '四等奖', top: '10%', winText: '恭喜获得四等奖', winFlag: true }], background: colorA }, // 1 0.5 - 1
-        { fonts: [{ text: '四等奖', top: '10%', winText: '恭喜获得四等奖',  winFlag: true }], background: colorB }, // 2 0.5 - 1
-        { fonts: [{ text: '谢谢参与', top: '10%', winText: '谢谢参与', winFlag: false }], background: colorA }, // 3 0.5 - 1
-        { fonts: [{ text: '一等奖', top: '10%', winText: '恭喜获得一等奖', winFlag: true }], background: colorB }, // 4  => 0.0127
-        { fonts: [{ text: '谢谢参与', top: '10%', winText: '谢谢参与', winFlag: false }], background: colorA }, // 5 0.5 - 1
-        { fonts: [{ text: '二等奖', top: '10%', winText: '恭喜获得二等奖', winFlag: true }], background: colorB }, // 6 => 0.021185
-        { fonts: [{ text: '谢谢参与', top: '10%', winText: '谢谢参与', winFlag: false  }], background: colorA }, // 7 => 0.38125
+        { x: 0, y: 0, fonts: [{ text: '', top: '10%', winText: '谢谢参与', winFlag: false }], 
+          imgs: [{
+            src: require('../../assets/1.png'),
+            activeSrc: require('../../assets/10.png'),
+            width: '125%',
+          }], 
+        }, // 8
+        {  x: 1, y: 0, fonts: [{ text: '', top: '10%', winText: '恭喜获得一等奖', winFlag: true }], imgs: [{
+          src: require('../../assets/2.png'),
+          activeSrc: require('../../assets/20.png'),
+         width: '125%',
+        }],}, // 1 0.5 - 1
+        { x: 2, y: 0, fonts: [{ text: '', top: '10%', winText: '谢谢参与',  winFlag: false }], imgs: [{
+          src: require('../../assets/3.png'),
+          activeSrc: require('../../assets/30.png'),
+          width: '125%',
+        }],}, // 2 0.5 - 1
+        {  x: 2, y: 1, fonts: [{ text: '', top: '10%', winText: '恭喜获得二等奖', winFlag: true }], imgs: [{
+          src: require('../../assets/4.png'),
+          activeSrc: require('../../assets/40.png'),
+          width: '125%',
+        }],}, // 3 0.5 - 1
+        { x: 2, y: 2, fonts: [{ text: '', top: '10%', winText: '恭喜获得三等奖', winFlag: true }], imgs: [{
+          src: require('../../assets/5.png'),
+          activeSrc: require('../../assets/50.png'),
+          width: '125%',
+        }], }, // 4  => 0.0127
+        {  x: 1, y: 2, fonts: [{ text: '', top: '10%', winText: '恭喜获得四等奖', winFlag: true }], imgs: [{
+          src: require('../../assets/6.png'),
+          activeSrc: require('../../assets/60.png'),
+         width: '125%',
+        }], }, // 5 0.5 - 1
+        { x: 0, y: 2, fonts: [{ text: '', top: '10%', winText: '恭喜获得四等奖', winFlag: true }], imgs: [{
+          src: require('../../assets/7.png'),
+          activeSrc: require('../../assets/70.png'),
+          width: '125%',
+        }], }, // 6 => 0.021185
+        {  x: 0, y: 1, fonts: [{ text: '', top: '10%', winText: '谢谢参与', winFlag: false  }], imgs: [{
+          src: require('../../assets/8.png'),
+          activeSrc: require('../../assets/80.png'),
+         width: '125%',
+        }], }, // 7 => 0.38125
       ]
     const buttons=[{
-        width:'92',
-        radius: '35%',
-        // background: 'red',
-        // fonts: [{ text: '开始\n抽奖', fontColor: '#fff',  top: '-40%', fontSize: '18px' }],
+        x: 1, y: 1,
         imgs: [{
-          src: require('../../assets/zp3_btn1.png'),
-          width: '150%',
-          height: '150%',
-          top: '-150%'
-        },
-        {
-          src: require('../../assets/zp3_btn2.png'),
-          width: '50%',
-          top: '-340%'
+          src: require('../../assets/start.png'),
+          width: '125%',
         }],
       }]
     let step = 2;
@@ -115,9 +140,7 @@ export default {
       const params =  self.$route.params
       const isPass = await self.curCheckAnsed(params, true)
 
-
       if (isPass) {
-        
         // 模拟调用接口异步抽奖
         let { data, restTimeToday }: any = await this.curGetWinIndex(params) || 1;
 
@@ -158,5 +181,8 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.van-cell-group {
+  margin-top: 48px;
 }
 </style>

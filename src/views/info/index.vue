@@ -94,7 +94,7 @@ export default defineComponent({
   background: url('../../assets/fy1.png');
   background-size:100% 100%;
   .title {
-    padding-top: 50%;
+    padding-top: 64%;
     margin: 0 5%;
   }
   .form_wrapper {

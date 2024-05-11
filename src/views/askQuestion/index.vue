@@ -14,7 +14,6 @@
       </div>
     </div>
     <van-cell-group inset class="subject" v-for="(item, i) in questionArr" :key="i">
-
       <van-field :label="item.question" required="true" :rules="[{ required: true, message: '请选择' }]" class="subject_title">
         <template #input>
           <van-radio-group  v-if="item.type === 'single'" v-model="result[i]">
@@ -119,10 +118,10 @@ export default defineComponent({
         }
       })
       
-      if (passNum >= 8) {
+      if (passNum >= 7) {
         curUpdate(resData.params.phone, {
           ask_ans: [...ask_ans, ...mul_ask_ans],
-          step: 1
+          step: 2
         })
 
         // console.log('resData.params', resData.params.id, resData.params.phone, resData.params.name);
@@ -149,8 +148,23 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+.van-cell-group:nth-child(even) {
+  .van-cell {
+    background-color: #EAF2F8; /* 淡蓝色 */
+  }
+}
+
+.van-cell-group:nth-child(odd) {
+  .van-cell {
+    background-color: #FFFBE6; /* 淡蓝色 */
+  }
+}
+
+
+
 .question_wrapper {
-  margin: 0.5rem;
+  padding: 0.5rem;
+  background-color: #FFFBE6; /* 淡蓝色 */
   .title {
     font-size: 18px;
     color: #333;

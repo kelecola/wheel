@@ -19,7 +19,7 @@ export const constantRouterMap: Array<RouteRecordRaw> = [
   },
   // 抽奖
   {
-    path: '/wheel/:id/:phone/:name',
+    path: '/wheel/:phone/:name',
     name: 'wheel',
     component: () => import('@/views/wheel/index.vue'),
   },
