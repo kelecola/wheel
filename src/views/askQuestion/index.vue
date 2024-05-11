@@ -14,7 +14,7 @@
       </div>
     </div>
     <van-cell-group inset class="subject" v-for="(item, i) in questionArr" :key="i">
-      <van-field :label="item.question" required="true" :rules="[{ required: true, message: '请选择' }]" class="subject_title">
+      <van-field :label="`${i+1}.${item.question}`" required="true" :rules="[{ required: true, message: '请选择' }]" class="subject_title">
         <template #input>
           <van-radio-group  v-if="item.type === 'single'" v-model="result[i]">
             <template v-for="it in item.ansList" :key="it.key">
@@ -28,7 +28,7 @@
 
     <van-cell-group inset class="subject" v-for="(item, i) in mulQuestionArr" :key="i">
 
-      <van-field :label="item.question" required="true" :rules="[{ required: true, message: '请选择' }]" class="subject_title">
+      <van-field :label="`${i+1+8}.${item.question}`" required="true" :rules="[{ required: true, message: '请选择' }]" class="subject_title">
         <template #input>
           <van-checkbox-group  v-if="item.type === 'mul'" v-model="mulResult[i]">
             <template v-for="it in item.ansList" :key="it.key">
@@ -94,10 +94,14 @@ export default defineComponent({
         D: 3
       }
 
+      const failArr: any = []
+
 
       const ask_ans = resData.questionArr.map((item: any, index: number) => {
         if (item.ans === resData.result[index]) {
           passNum++;
+        } else {
+          failArr.push(index + 1)
         }
         return {
           question : item.question,
@@ -111,6 +115,8 @@ export default defineComponent({
       const mul_ask_ans = resData.mulQuestionArr.map((item: any, index: number) => {
         if (item.ans === resData.mulResult[index].join('')) {
           passNum++;
+        } else {
+          failArr.push(index + 1 + 8)
         }
         return {
           question : item.question,
@@ -128,7 +134,7 @@ export default defineComponent({
         
         router.push(`/wheel/${resData.params.phone}/${resData.params.name}`)
       } else {
-        Toast.fail(`已答对${passNum}道，答对7道题以上，即可参与抽奖`)
+        Toast.fail(`已答对${passNum}道，答对7道题以上，即可参与抽奖，${failArr.join('、')}题存在错误`)
       }
     }
 
