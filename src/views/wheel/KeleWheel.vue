@@ -59,7 +59,7 @@ export default {
           activeSrc: require('../../assets/50.png'),
           width: '125%',
         }], }, // 4  => 0.0127
-        {  x: 1, y: 2, fonts: [{ text: '', top: '10%', winText: '恭喜获得四等奖', winFlag: true }], imgs: [{
+        {  x: 1, y: 2, fonts: [{ text: '', top: '10%', winText: '恭喜获得三等奖', winFlag: true }], imgs: [{
           src: require('../../assets/6.png'),
           activeSrc: require('../../assets/60.png'),
          width: '125%',
@@ -69,7 +69,7 @@ export default {
           activeSrc: require('../../assets/70.png'),
           width: '125%',
         }], }, // 6 => 0.021185
-        {  x: 0, y: 1, fonts: [{ text: '', top: '10%', winText: '谢谢参与', winFlag: false  }], imgs: [{
+        {  x: 0, y: 1, fonts: [{ text: '', top: '10%', winText: '恭喜获得四等奖', winFlag: true  }], imgs: [{
           src: require('../../assets/8.png'),
           activeSrc: require('../../assets/80.png'),
          width: '125%',
